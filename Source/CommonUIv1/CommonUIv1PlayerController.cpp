@@ -21,6 +21,11 @@ ACommonUIv1PlayerController::ACommonUIv1PlayerController()
 	DefaultMouseCursor = EMouseCursor::Default;
 }
 
+UGameHUD* ACommonUIv1PlayerController::GetGameHUD() const
+{
+	return Cast<UGameHUD>(GameHUD);
+}
+
 void ACommonUIv1PlayerController::BeginPlay()
 {
 	Super::BeginPlay();

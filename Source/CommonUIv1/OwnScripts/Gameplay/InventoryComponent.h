@@ -9,6 +9,7 @@
 
 class UItemSlot;
 class UInventoryItem;
+class ACommonUIv1PlayerController;
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class COMMONUIV1_API UInventoryComponent : public UActorComponent
@@ -48,7 +49,12 @@ public:
 	virtual void PrintInventory() const;
 
 	virtual void DrawInventory(UGameHUD* GameHUD) const;
-	
+
+private:
+
+	UPROPERTY()
+	ACommonUIv1PlayerController* PlayerController;
+
 	UPROPERTY(VisibleAnywhere, Category="ItemSlots", meta = (AllowPrivateAccess = "true"))
 	TArray<UItemSlot*> ItemSlots;
 };

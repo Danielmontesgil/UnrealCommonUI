@@ -1,11 +1,11 @@
 {
     "Version": "1.1",
     "Data": {
-        "Source": "d:\\documents\\aprendiendo globant\\c++ projects\\commonuiv1\\plugins\\developer\\riderlink\\source\\rd\\rd.cpp",
+        "Source": "d:\\documents\\github\\unrealcommonui\\plugins\\developer\\riderlink\\source\\rd\\rd.cpp",
         "ProvidedModule": "",
         "Includes": [
-            "d:\\documents\\aprendiendo globant\\c++ projects\\commonuiv1\\plugins\\developer\\riderlink\\intermediate\\build\\win64\\unrealeditor\\development\\rd\\definitions.h",
-            "d:\\documents\\aprendiendo globant\\c++ projects\\commonuiv1\\plugins\\developer\\riderlink\\source\\rd\\rd.h",
+            "d:\\documents\\github\\unrealcommonui\\plugins\\developer\\riderlink\\intermediate\\build\\win64\\unrealeditor\\development\\rd\\definitions.h",
+            "d:\\documents\\github\\unrealcommonui\\plugins\\developer\\riderlink\\source\\rd\\rd.h",
             "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\core\\public\\logging\\logmacros.h",
             "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\core\\public\\coretypes.h",
             "c:\\program files\\epic games\\ue_5.0\\engine\\source\\runtime\\core\\public\\hal\\platform.h",
