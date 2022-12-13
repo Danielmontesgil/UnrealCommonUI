@@ -3,18 +3,12 @@
 
 #include "InventoryViewModel.h"
 #include "CommonUIv1/CommonUIv1Character.h"
-#include "CommonUIv1/CommonUIv1PlayerController.h"
 #include "CommonUIv1/OwnScripts/Gameplay/InventoryComponent.h"
 #include "CommonUIv1/OwnScripts/Gameplay/ItemSlot.h"
 
-void UInventoryViewModel::Init(ACommonUIv1PlayerController* Controller)
+void UInventoryViewModel::Init(const ACommonUIv1Character* Character)
 {
-	if(!Controller)
-	{
-		return;
-	}
-	PlayerController = Controller;
-	if(const auto Character = Cast<ACommonUIv1Character>(PlayerController->GetCharacter()))
+	if(Character->GetInventoryComponent())
 	{
 		Inventory = Character->GetInventoryComponent();
 	}
@@ -24,33 +18,30 @@ void UInventoryViewModel::Init(ACommonUIv1PlayerController* Controller)
 
 void UInventoryViewModel::RegisterDelegates()
 {	
-	if(PlayerController && Inventory)
+	if(Inventory)
 	{
-		PlayerController->OnInventoryOpenedDelegate.AddUObject(this,&UInventoryViewModel::OnInventoryOpened);
-		Inventory->OnInventoryUpdatedDelegate.AddUObject(this,&UInventoryViewModel::UpdateUI);
+		Inventory->OnInventoryUpdatedDelegate.AddUObject(this, &UInventoryViewModel::OnInventoryUpdated);
 	}
 }
 
 void UInventoryViewModel::UpdateUI()
 {
-	if(const ACommonUIv1Character* Character = Cast<ACommonUIv1Character>(PlayerController->GetCharacter()))
+	for(size_t i = 0; i < InventoryData.Num(); i++)
 	{
-		if(const UInventoryComponent* InventoryComponent = Character->GetInventoryComponent())
+		const UItemSlot* ItemSlot = InventoryData[i];
+		if(ItemSlot && ItemSlot->Item)
 		{
-			for(uint32 i = 0; i < Character->GetInventorySize(); i++)
-			{
-				const UItemSlot* ItemSlot = InventoryComponent->GetSlotByIndex(i);
-				if(ItemSlot && ItemSlot->Item)
-				{
-					OnDrawInventorySlotDelegate.Broadcast(i, ItemSlot->Quantity, ItemSlot->Item->GetIcon());
-				}
-			}
+			OnDrawInventorySlotDelegate.Broadcast(i, ItemSlot->Quantity, ItemSlot->Item->GetIcon());
 		}
 	}
 }
 
-void UInventoryViewModel::OnInventoryOpened()
+void UInventoryViewModel::OnInventoryUpdated(bool NeedToOpenInventory, const TArray<UItemSlot*>& ItemSlots)
 {
-	OnInventoryOpenedDelegate.Broadcast();
+	InventoryData = ItemSlots;
+	if(NeedToOpenInventory)
+	{
+		OnShowInventoryDelegate.Broadcast();
+	}
 	UpdateUI();
 }

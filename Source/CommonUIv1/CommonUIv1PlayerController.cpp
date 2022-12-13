@@ -175,5 +175,5 @@ void ACommonUIv1PlayerController::OnPickPressed()
 
 void ACommonUIv1PlayerController::OnInventoryPressed()
 {	
-	OnInventoryOpenedDelegate.Broadcast();
+	OnInventoryPressedDelegate.Broadcast();
 }

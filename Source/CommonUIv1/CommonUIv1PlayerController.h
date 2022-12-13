@@ -23,7 +23,7 @@ public:
 	ACommonUIv1PlayerController();
 	
 	FOnItemAddedSignature OnItemAddedDelegate;
-	FOnInventoryPressedSignature OnInventoryOpenedDelegate;
+	FOnInventoryPressedSignature OnInventoryPressedDelegate;
 
 	/** Time Threshold to know if it was a short press */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)

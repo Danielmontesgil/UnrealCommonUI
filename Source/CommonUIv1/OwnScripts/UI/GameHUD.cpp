@@ -2,20 +2,21 @@
 
 
 #include "GameHUD.h"
-#include "CommonUIv1/CommonUIv1PlayerController.h"
+#include "InventorySlot.h"
+#include "CommonUIv1/CommonUIv1Character.h"
 #include "CommonUIv1/OwnScripts/ViewModels/InventoryViewModel.h"
 #include "Components/VerticalBox.h"
 
 void UGameHUD::Init()
 {
 	InventoryViewModel = NewObject<UInventoryViewModel>();
-	InventoryViewModel->Init(Cast<ACommonUIv1PlayerController>(GetOwningPlayer()));
-	InventoryViewModel->OnInventoryOpenedDelegate.AddUObject(this, &UGameHUD::OnInventoryOpened);
+	InventoryViewModel->Init(Cast<ACommonUIv1Character>(GetOwningPlayer()->GetCharacter()));
+	InventoryViewModel->OnShowInventoryDelegate.AddUObject(this, &UGameHUD::OnShowInventory);
 	InventoryViewModel->OnDrawInventorySlotDelegate.AddUObject(this,&UGameHUD::OnDrawInventorySlot);
 	InventoryContainer->SetVisibility(ESlateVisibility::Hidden);
 }
 
-void UGameHUD::OnInventoryOpened() const
+void UGameHUD::OnShowInventory() const
 {
 	InventoryContainer->SetVisibility(InventoryContainer->Visibility == ESlateVisibility::Hidden ? ESlateVisibility::Visible : ESlateVisibility::Hidden);
 }

@@ -38,6 +38,7 @@ void UInventoryComponent::BeginPlay()
 	
 	if(PlayerController)
 	{
+		PlayerController->OnInventoryPressedDelegate.AddUObject(this, &UInventoryComponent::OnInventoryOpened);
 		PlayerController->OnItemAddedDelegate.BindUObject(this,&UInventoryComponent::AddItem);
 	}
 }
@@ -72,7 +73,7 @@ UItemSlot* UInventoryComponent::AddItem(UItemSlot* Slot)
 					ItemSlots[i]->Quantity += Slot->Quantity;
 					// Slot->Quantity = 0;
 					// Event to update items
-					OnInventoryUpdatedDelegate.Broadcast();
+					OnInventoryUpdatedDelegate.Broadcast(false, ItemSlots);
 					return Slot;
 				}
 				
@@ -95,7 +96,7 @@ UItemSlot* UInventoryComponent::AddItem(UItemSlot* Slot)
 				// Slot->Quantity = 0;
 
 				// Event to update items
-				OnInventoryUpdatedDelegate.Broadcast();
+				OnInventoryUpdatedDelegate.Broadcast(false, ItemSlots);
 
 				return Slot;
 			}
@@ -110,7 +111,7 @@ UItemSlot* UInventoryComponent::AddItem(UItemSlot* Slot)
 		}
 	}
 
-	OnInventoryUpdatedDelegate.Broadcast();
+	OnInventoryUpdatedDelegate.Broadcast(false, ItemSlots);
 
 	return Slot;
 }
@@ -254,19 +255,7 @@ void UInventoryComponent::Swap(uint32 IndexOne, uint32 IndexTwo)
 	}
 }
 
-// void UInventoryComponent::DrawInventory(UGameHUD* GameHUD) const
-// {
-// 	for(size_t i = 0; i < GameHUD->InventorySlots.Num(); i++)
-// 	{
-// 		if(GameHUD->InventorySlots[i])
-// 		{
-// 			if(UInventorySlot* SlotWidget = Cast<UInventorySlot>(GameHUD->InventorySlots[i]))
-// 			{
-// 				if(ItemSlots[i] && ItemSlots[i]->Item)
-// 				{
-// 					SlotWidget->FillSlotInfo(ItemSlots[i]->Quantity,ItemSlots[i]->Item->GetIcon());
-// 				}
-// 			}
-// 		}
-// 	}
-// }
+void UInventoryComponent::OnInventoryOpened()
+{
+	OnInventoryUpdatedDelegate.Broadcast(true, ItemSlots);
+}

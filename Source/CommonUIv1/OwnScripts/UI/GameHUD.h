@@ -29,6 +29,6 @@ protected:
 	class UInventoryViewModel* InventoryViewModel;
 
 private:
-	void OnInventoryOpened() const;
+	void OnShowInventory() const;
 	void OnDrawInventorySlot(uint32 Index, uint32 Quantity, UTexture2D* ItemIcon) const;
 };
