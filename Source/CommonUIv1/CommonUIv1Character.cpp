@@ -43,7 +43,7 @@ ACommonUIv1Character::ACommonUIv1Character()
 	TopDownCameraComponent->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
 	Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("InventoryComponent"));
-	Inventory->SetSize(20);
+	Inventory->SetSize(InventorySize);
 
 	// Activate ticking in order to update the cursor every frame.
 	PrimaryActorTick.bCanEverTick = true;

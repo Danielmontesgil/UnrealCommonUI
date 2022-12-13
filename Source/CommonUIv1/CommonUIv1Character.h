@@ -23,6 +23,8 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 
 	FORCEINLINE class UInventoryComponent* GetInventoryComponent() const { return Inventory; }
+	
+	FORCEINLINE uint32 GetInventorySize() const { return InventorySize; }
 
 private:
 	/** Top down camera */
@@ -34,6 +36,9 @@ private:
 	class USpringArmComponent* CameraBoom;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="ItemSlots", meta = (AllowPrivateAccess = "true"))
-	class UInventoryComponent* Inventory; 
+	class UInventoryComponent* Inventory;
+
+	UPROPERTY(EditAnywhere, meta=(AllowPrivateAccess="true"))
+	uint32 InventorySize = 5;
 };
 

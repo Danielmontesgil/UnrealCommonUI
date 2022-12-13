@@ -11,7 +11,9 @@ class UItemSlot;
 class UInventoryItem;
 class ACommonUIv1PlayerController;
 
-UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
+DECLARE_MULTICAST_DELEGATE(FOnInventoryUpdatedSignature)
+
+UCLASS()
 class COMMONUIV1_API UInventoryComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -20,6 +22,8 @@ public:
 	// Sets default values for this component's properties
 	UInventoryComponent();
 	UInventoryComponent(size_t Size);
+
+	FOnInventoryUpdatedSignature OnInventoryUpdatedDelegate;
 
 protected:
 	// Called when the game starts
@@ -30,7 +34,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
 	                           FActorComponentTickFunction* ThisTickFunction) override;
 
-	virtual void SetSize(size_t Size);
+	virtual void SetSize(uint32 Size);
 
 	virtual UItemSlot* GetSlotByIndex(const uint32 SlotIndex) const;
 	
@@ -46,9 +50,7 @@ public:
 
 	virtual void Swap(uint32 IndexOne, uint32 IndexTwo);
 
-	virtual void PrintInventory() const;
-
-	virtual void DrawInventory(UGameHUD* GameHUD) const;
+	//virtual void DrawInventory(UGameHUD* GameHUD) const;
 
 private:
 

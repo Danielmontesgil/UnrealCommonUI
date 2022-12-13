@@ -23,7 +23,7 @@ UInventoryComponent::UInventoryComponent(size_t Size)
 	ItemSlots.Init(NewObject<UItemSlot>() ,Size);
 }
 
-void UInventoryComponent::SetSize(size_t Size)
+void UInventoryComponent::SetSize(uint32 Size)
 {
 	ItemSlots.Init(NewObject<UItemSlot>() ,Size);
 }
@@ -39,7 +39,6 @@ void UInventoryComponent::BeginPlay()
 	if(PlayerController)
 	{
 		PlayerController->OnItemAddedDelegate.BindUObject(this,&UInventoryComponent::AddItem);
-		PlayerController->OnInventoryOpenedDelegate.AddUObject(this,&UInventoryComponent::DrawInventory);
 	}
 }
 
@@ -73,10 +72,7 @@ UItemSlot* UInventoryComponent::AddItem(UItemSlot* Slot)
 					ItemSlots[i]->Quantity += Slot->Quantity;
 					// Slot->Quantity = 0;
 					// Event to update items
-					if(UGameHUD* GameHUD = PlayerController->GetGameHUD())
-					{
-						DrawInventory(GameHUD);
-					}
+					OnInventoryUpdatedDelegate.Broadcast();
 					return Slot;
 				}
 				
@@ -99,10 +95,7 @@ UItemSlot* UInventoryComponent::AddItem(UItemSlot* Slot)
 				// Slot->Quantity = 0;
 
 				// Event to update items
-				if(UGameHUD* GameHUD = PlayerController->GetGameHUD())
-				{
-					DrawInventory(GameHUD);
-				}
+				OnInventoryUpdatedDelegate.Broadcast();
 
 				return Slot;
 			}
@@ -117,11 +110,7 @@ UItemSlot* UInventoryComponent::AddItem(UItemSlot* Slot)
 		}
 	}
 
-	// Event to update items
-	if(UGameHUD* GameHUD = PlayerController->GetGameHUD())
-	{
-		DrawInventory(GameHUD);
-	}
+	OnInventoryUpdatedDelegate.Broadcast();
 
 	return Slot;
 }
@@ -181,7 +170,7 @@ void UInventoryComponent::RemoveAt(size_t SlotIndex)
 	// Event to update items
 	if(UGameHUD* GameHUD = PlayerController->GetGameHUD())
 	{
-		DrawInventory(GameHUD);
+		//DrawInventory(GameHUD);
 	}
 }
 
@@ -211,7 +200,7 @@ void UInventoryComponent::RemoveItem(UItemSlot* Slot)
 						// Event to update items
 						if(UGameHUD* GameHUD = PlayerController->GetGameHUD())
 						{
-							DrawInventory(GameHUD);
+							//DrawInventory(GameHUD);
 						}
 
 						return;
@@ -247,7 +236,7 @@ void UInventoryComponent::Swap(uint32 IndexOne, uint32 IndexTwo)
 				// Event to update items
 				if(UGameHUD* GameHUD = PlayerController->GetGameHUD())
 				{
-					DrawInventory(GameHUD);
+					//DrawInventory(GameHUD);
 				}
 				
 				return;
@@ -261,38 +250,23 @@ void UInventoryComponent::Swap(uint32 IndexOne, uint32 IndexTwo)
 	// Event to update items
 	if(UGameHUD* GameHUD = PlayerController->GetGameHUD())
 	{
-		DrawInventory(GameHUD);
+		//DrawInventory(GameHUD);
 	}
 }
 
-void UInventoryComponent::PrintInventory() const
-{
-	for(UItemSlot* Slot : ItemSlots)
-	{
-		if(Slot->Item != nullptr)
-		{
-			UE_LOG(LogTemp,Warning,TEXT("Item Name: %s, Item Quantity: %u"),*Slot->Item->GetName(),Slot->Quantity);
-		}
-	}
-}
-
-void UInventoryComponent::DrawInventory(UGameHUD* GameHUD) const
-{
-	for(size_t i = 0; i < GameHUD->InventorySlots.Num(); i++)
-	{
-		if(GameHUD->InventorySlots[i])
-		{
-			UInventorySlot* SlotWidget = Cast<UInventorySlot>(GameHUD->InventorySlots[i]);
-
-			if(SlotWidget)
-			{
-				if(ItemSlots[i] && ItemSlots[i]->Item)
-				{
-					SlotWidget->FillSlotInfo(ItemSlots[i]->Quantity,ItemSlots[i]->Item->GetIcon());
-				}
-			}
-		}
-	}
-}
-
-
+// void UInventoryComponent::DrawInventory(UGameHUD* GameHUD) const
+// {
+// 	for(size_t i = 0; i < GameHUD->InventorySlots.Num(); i++)
+// 	{
+// 		if(GameHUD->InventorySlots[i])
+// 		{
+// 			if(UInventorySlot* SlotWidget = Cast<UInventorySlot>(GameHUD->InventorySlots[i]))
+// 			{
+// 				if(ItemSlots[i] && ItemSlots[i]->Item)
+// 				{
+// 					SlotWidget->FillSlotInfo(ItemSlots[i]->Quantity,ItemSlots[i]->Item->GetIcon());
+// 				}
+// 			}
+// 		}
+// 	}
+// }

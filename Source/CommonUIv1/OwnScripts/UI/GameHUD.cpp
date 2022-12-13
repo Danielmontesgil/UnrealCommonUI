@@ -2,29 +2,36 @@
 
 
 #include "GameHUD.h"
-#include "Components/UniformGridSlot.h"
-#include "Components/UniformGridPanel.h"
+#include "CommonUIv1/CommonUIv1PlayerController.h"
+#include "CommonUIv1/OwnScripts/ViewModels/InventoryViewModel.h"
+#include "Components/VerticalBox.h"
 
-// This just to test how to add widgets using Synchronize Properties
+void UGameHUD::Init()
+{
+	InventoryViewModel = NewObject<UInventoryViewModel>();
+	InventoryViewModel->Init(Cast<ACommonUIv1PlayerController>(GetOwningPlayer()));
+	InventoryViewModel->OnInventoryOpenedDelegate.AddUObject(this, &UGameHUD::OnInventoryOpened);
+	InventoryViewModel->OnDrawInventorySlotDelegate.AddUObject(this,&UGameHUD::OnDrawInventorySlot);
+	InventoryContainer->SetVisibility(ESlateVisibility::Hidden);
+}
 
-// void UGameHUD::SynchronizeProperties()
-// {
-// 	Super::SynchronizeProperties();
-//
-// 	for (int32 y = 0; y < Rows; ++y)
-// 	{
-// 		for (int32 x = 0; x < Columns; ++x)
-// 		{
-// 			UUserWidget* Widget = CreateWidget<UUserWidget>(
-// 				GetWorld(), InventorySlotClass);
-// 			if (Widget)
-// 			{
-// 				UUniformGridSlot* GridSlot = Grid->AddChildToUniformGrid(
-// 					Widget);
-// 				GridSlot->SetColumn(x);
-// 				GridSlot->SetRow(y);
-// 				InventorySlots.Add(Widget);
-// 			}
-// 		}
-// 	}
-// }
+void UGameHUD::OnInventoryOpened() const
+{
+	InventoryContainer->SetVisibility(InventoryContainer->Visibility == ESlateVisibility::Hidden ? ESlateVisibility::Visible : ESlateVisibility::Hidden);
+}
+
+
+void UGameHUD::OnDrawInventorySlot(uint32 Index, uint32 Quantity, UTexture2D* ItemIcon) const
+{
+	if(InventoryContainer->Visibility == ESlateVisibility::Hidden)
+	{
+		return;
+	}
+	if(const UInventorySlot* SlotWidget = Cast<UInventorySlot>(InventorySlots[Index]))
+	{
+		if(ItemIcon)
+		{
+			SlotWidget->FillSlotInfo(Quantity,ItemIcon);
+		}
+	}
+}

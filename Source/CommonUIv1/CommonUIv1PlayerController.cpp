@@ -6,12 +6,10 @@
 #include "NiagaraSystem.h"
 #include "NiagaraFunctionLibrary.h"
 #include "CommonUIv1Character.h"
-#include "OwnScripts/Gameplay/ConsumableItem.h"
 #include "OwnScripts/Gameplay/InteractableBase.h"
-#include "OwnScripts/Gameplay/InventoryComponent.h"
 #include "OwnScripts/Gameplay/ItemSlot.h"
 #include "Blueprint/UserWidget.h"
-#include "Kismet/GameplayStatics.h"
+#include "OwnScripts/Gameplay/ConsumableItem.h"
 #include "OwnScripts/UI/GameHUD.h"
 
 ACommonUIv1PlayerController::ACommonUIv1PlayerController()
@@ -29,6 +27,8 @@ UGameHUD* ACommonUIv1PlayerController::GetGameHUD() const
 void ACommonUIv1PlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+
+	InitGameHUD();
 }
 
 void ACommonUIv1PlayerController::PlayerTick(float DeltaTime)
@@ -77,9 +77,28 @@ void ACommonUIv1PlayerController::SetupInputComponent()
 	InputComponent->BindAction("Inventory", IE_Pressed, this, &ACommonUIv1PlayerController::OnInventoryPressed);
 	
 	// support touch devices 
-	InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &ACommonUIv1PlayerController::OnTouchPressed);
-	InputComponent->BindTouch(EInputEvent::IE_Released, this, &ACommonUIv1PlayerController::OnTouchReleased);
+	InputComponent->BindTouch(IE_Pressed, this, &ACommonUIv1PlayerController::OnTouchPressed);
+	InputComponent->BindTouch(IE_Released, this, &ACommonUIv1PlayerController::OnTouchReleased);
 
+}
+
+void ACommonUIv1PlayerController::InitGameHUD()
+{
+	if(GameHUD)
+	{
+		GameHUD->RemoveFromParent();
+		GameHUD=nullptr;
+		return;
+	}
+	
+	GameHUD = Cast<UGameHUD>(CreateWidget(this,GameHUDClass));
+
+	if(GameHUD)
+	{
+		GameHUD->AddToViewport();
+		GameHUD->SetOwningPlayer(this);
+		GameHUD->Init();
+	}
 }
 
 void ACommonUIv1PlayerController::OnSetDestinationPressed()
@@ -137,7 +156,7 @@ void ACommonUIv1PlayerController::OnPickPressed()
 
 		if(PlayerActor && DistanceToInteractable < PickRange)
 		{
-			if(UInventoryItem* InventoryItem = Cast<UInventoryItem>(Interactable->GetConsumable()))
+			if(UConsumableItem* InventoryItem = Interactable->GetConsumable())
 			{
 				UItemSlot* ItemSlot = NewObject<UItemSlot>();
 				ItemSlot->Item = InventoryItem;
@@ -155,21 +174,6 @@ void ACommonUIv1PlayerController::OnPickPressed()
 }
 
 void ACommonUIv1PlayerController::OnInventoryPressed()
-{
-	if(GameHUD)
-	{
-		GameHUD->RemoveFromParent();
-		GameHUD=nullptr;
-		return;
-	}
-	
-	GameHUD = CreateWidget(this,GameHUDClass);
-
-	if(GameHUD)
-	{
-		GameHUD->AddToViewport();
-	}
-
-	UGameHUD* GameHUDWidget = Cast<UGameHUD>(GameHUD);
-	OnInventoryOpenedDelegate.Broadcast(GameHUDWidget);
+{	
+	OnInventoryOpenedDelegate.Broadcast();
 }

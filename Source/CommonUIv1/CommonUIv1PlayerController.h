@@ -12,7 +12,7 @@ class UItemSlot;
 class UGameHUD;
 
 DECLARE_DELEGATE_RetVal_OneParam(UItemSlot*, FOnItemAddedSignature, UItemSlot*);
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnInventoryOpenedSignature, UGameHUD*)
+DECLARE_MULTICAST_DELEGATE(FOnInventoryPressedSignature)
 
 UCLASS()
 class ACommonUIv1PlayerController : public APlayerController
@@ -23,7 +23,7 @@ public:
 	ACommonUIv1PlayerController();
 	
 	FOnItemAddedSignature OnItemAddedDelegate;
-	FOnInventoryOpenedSignature OnInventoryOpenedDelegate;
+	FOnInventoryPressedSignature OnInventoryOpenedDelegate;
 
 	/** Time Threshold to know if it was a short press */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
@@ -43,6 +43,7 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void PlayerTick(float DeltaTime) override;
 	virtual void SetupInputComponent() override;
+	virtual void InitGameHUD();
 	// End PlayerController interface
 
 	/** Input handlers for SetDestination action. */
@@ -65,7 +66,7 @@ private:
 	float PickRange = 200.f;
 
 	UPROPERTY()
-	UUserWidget* GameHUD;
+	UGameHUD* GameHUD;
 };
 
 
