@@ -21,14 +21,13 @@ D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Source\RD\src\rd_
 /I Runtime\Core\Public
 /I ThirdParty\mimalloc\include
 /I "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\INCLUDE"
-/I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt"
 /FI"D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\Definitions.h"
 /Fo"D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\ISerializable.cpp.obj"
-/sourceDependencies D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\ISerializable.cpp.json
+/sourceDependencies D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\ISerializable.cpp.dep.json
 /Zc:inline
 /nologo
 /Oi
@@ -45,6 +44,7 @@ D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Source\RD\src\rd_
 /source-charset:utf-8
 /execution-charset:utf-8
 /Ob2
+/fastfail
 /Ox
 /Ot
 /GF

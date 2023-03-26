@@ -11,6 +11,7 @@
 /DELAY:UNLOAD
 /DLL
 /PDBALTPATH:%_PDB%
+/fastfail
 /OPT:NOREF
 /OPT:NOICF
 /INCREMENTAL:NO
@@ -19,7 +20,6 @@
 /DELAYLOAD:"d3d12.dll"
 /DELAYLOAD:"DBGHELP.DLL"
 /LIBPATH:"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\lib\x64"
-/LIBPATH:"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\lib\um\x64"
 /LIBPATH:"C:\Program Files (x86)\Windows Kits\10\lib\10.0.19041.0\ucrt\x64"
 /LIBPATH:"C:\Program Files (x86)\Windows Kits\10\lib\10.0.19041.0\um\x64"
 /NODEFAULTLIB:"LIBCMT"
@@ -32,7 +32,8 @@
 /NODEFAULTLIB:"LIBCP"
 /NODEFAULTLIB:"LIBCD"
 /NODEFAULTLIB:"LIBCPD"
-/FUNCTIONPADMIN
+/FUNCTIONPADMIN:6
+"D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\RD.cpp.obj"
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\Lifetime.cpp.obj"
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\LifetimeDefinition.cpp.obj"
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\LifetimeImpl.cpp.obj"
@@ -56,11 +57,11 @@
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\MessageBroker.cpp.obj"
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\Protocol.cpp.obj"
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\RdId.cpp.obj"
-"D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\IScheduler.cpp.obj"
-"D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\SingleThreadSchedulerBase.cpp.obj"
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\SimpleScheduler.cpp.obj"
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\SingleThreadScheduler.cpp.obj"
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\SynchronousScheduler.cpp.obj"
+"D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\IScheduler.cpp.obj"
+"D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\SingleThreadSchedulerBase.cpp.obj"
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\DefaultAbstractDeclaration.cpp.obj"
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\ISerializable.cpp.obj"
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\Polymorphic.cpp.obj"
@@ -75,6 +76,7 @@
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\SocketWire.cpp.obj"
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\WireUtil.cpp.obj"
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\RdTextBuffer.cpp.obj"
+"D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\thirdparty.cpp.obj"
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\ActiveSocket.cpp.obj"
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\PassiveSocket.cpp.obj"
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\SimpleSocket.cpp.obj"
@@ -86,8 +88,6 @@
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\fmt.cpp.obj"
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\spdlog.cpp.obj"
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\stdout_sinks.cpp.obj"
-"D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\thirdparty.cpp.obj"
-"D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\RD.cpp.obj"
 "D:\Documents\GitHub\UnrealCommonUI\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\Default.rc2.res"
 "..\Intermediate\Build\Win64\UnrealEditor\Development\Core\UnrealEditor-Core.lib"
 "delayimp.lib"
