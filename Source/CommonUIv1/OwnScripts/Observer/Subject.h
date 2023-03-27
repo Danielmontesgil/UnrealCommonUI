@@ -4,11 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
-#include "ViewModelable.generated.h"
+#include "Subject.generated.h"
+
+class IObserver;
 
 // This class does not need to be modified.
 UINTERFACE()
-class UViewModelable : public UInterface
+class USubject : public UInterface
 {
 	GENERATED_BODY()
 };
@@ -16,12 +18,13 @@ class UViewModelable : public UInterface
 /**
  * 
  */
-class COMMONUIV1_API IViewModelable
+class COMMONUIV1_API ISubject
 {
 	GENERATED_BODY()
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-	virtual void RegisterDelegates() = 0;
-	virtual void UpdateUI() = 0;
+	virtual void Attach(IObserver* observer)=0;
+	virtual void Detach(IObserver* observer)=0;
+	virtual void Notify()=0;
 };

@@ -11,7 +11,9 @@ class UItemSlot;
 class UInventoryItem;
 class ACommonUIv1PlayerController;
 
-DECLARE_MULTICAST_DELEGATE_TwoParams(FOnInventoryUpdatedSignature, bool, const TArray<UItemSlot*>&)
+DECLARE_MULTICAST_DELEGATE(FOnShowInventorySignature)
+DECLARE_MULTICAST_DELEGATE_ThreeParams(FOnDrawInventorySlotSignature, uint32, uint32, UTexture2D*)
+
 
 UCLASS()
 class COMMONUIV1_API UInventoryComponent : public UActorComponent
@@ -23,7 +25,8 @@ public:
 	UInventoryComponent();
 	UInventoryComponent(size_t Size);
 
-	FOnInventoryUpdatedSignature OnInventoryUpdatedDelegate;
+	FOnShowInventorySignature OnShowInventoryDelegate;
+	FOnDrawInventorySlotSignature OnDrawInventorySlotDelegate;
 
 protected:
 	// Called when the game starts
@@ -49,6 +52,8 @@ public:
 	virtual void RemoveItem(UItemSlot* Slot);
 
 	virtual void Swap(uint32 IndexOne, uint32 IndexTwo);
+
+	void UpdateUI();
 
 	void OnInventoryOpened();
 

@@ -97,7 +97,7 @@ void ACommonUIv1PlayerController::InitGameHUD()
 	{
 		GameHUD->AddToViewport();
 		GameHUD->SetOwningPlayer(this);
-		GameHUD->Init();
+		GameHUD->Init(Cast<ACommonUIv1Character>(GetCharacter())->GetInventoryComponent());
 	}
 }
 

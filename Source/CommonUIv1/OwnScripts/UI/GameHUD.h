@@ -15,7 +15,7 @@ class COMMONUIV1_API UGameHUD : public UUserWidget
 	GENERATED_BODY()
 
 public:
-	void Init();
+	void Init(class UInventoryComponent* Inventory);
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<UUserWidget*> InventorySlots;
@@ -26,7 +26,7 @@ protected:
 	class UVerticalBox* InventoryContainer;
 
 	UPROPERTY()
-	class UInventoryViewModel* InventoryViewModel;
+	UInventoryComponent* InventoryViewModel;
 
 private:
 	void OnShowInventory() const;

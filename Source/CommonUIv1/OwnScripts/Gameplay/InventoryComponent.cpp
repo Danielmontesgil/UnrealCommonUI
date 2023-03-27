@@ -73,7 +73,7 @@ UItemSlot* UInventoryComponent::AddItem(UItemSlot* Slot)
 					ItemSlots[i]->Quantity += Slot->Quantity;
 					// Slot->Quantity = 0;
 					// Event to update items
-					OnInventoryUpdatedDelegate.Broadcast(false, ItemSlots);
+					UpdateUI();
 					return Slot;
 				}
 				
@@ -96,7 +96,7 @@ UItemSlot* UInventoryComponent::AddItem(UItemSlot* Slot)
 				// Slot->Quantity = 0;
 
 				// Event to update items
-				OnInventoryUpdatedDelegate.Broadcast(false, ItemSlots);
+				UpdateUI();
 
 				return Slot;
 			}
@@ -111,7 +111,7 @@ UItemSlot* UInventoryComponent::AddItem(UItemSlot* Slot)
 		}
 	}
 
-	OnInventoryUpdatedDelegate.Broadcast(false, ItemSlots);
+	UpdateUI();
 
 	return Slot;
 }
@@ -255,7 +255,20 @@ void UInventoryComponent::Swap(uint32 IndexOne, uint32 IndexTwo)
 	}
 }
 
+void UInventoryComponent::UpdateUI()
+{
+	for(size_t i = 0; i < ItemSlots.Num(); i++)
+	{
+		const UItemSlot* ItemSlot = ItemSlots[i];
+		if(ItemSlot && ItemSlot->Item)
+		{
+			OnDrawInventorySlotDelegate.Broadcast(i, ItemSlot->Quantity, ItemSlot->Item->GetIcon());
+		}
+	}
+}
+
 void UInventoryComponent::OnInventoryOpened()
 {
-	OnInventoryUpdatedDelegate.Broadcast(true, ItemSlots);
+	OnShowInventoryDelegate.Broadcast();
+	UpdateUI();
 }
