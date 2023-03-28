@@ -37,7 +37,7 @@ public:
 
 	bool Swap(uint32 IndexOne, uint32 IndexTwo);
 
-	const TArray<UItemSlot*>& GetInventory(){ return ItemSlots; }
+	const TArray<UItemSlot*>& GetInventory() const { return ItemSlots; }
 
 private:
 	UPROPERTY(VisibleAnywhere, Category="ItemSlots", meta = (AllowPrivateAccess = "true"))
