@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "GameHUD.generated.h"
 
+class UItemSlot;
 /**
  * 
  */
@@ -30,5 +31,5 @@ protected:
 
 private:
 	void OnShowInventory() const;
-	void OnDrawInventorySlot(uint32 Index, uint32 Quantity, UTexture2D* ItemIcon) const;
+	void OnDrawInventorySlot(const TArray<UItemSlot*>& ItemSlots) const;
 };

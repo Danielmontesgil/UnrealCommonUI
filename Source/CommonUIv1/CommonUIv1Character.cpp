@@ -2,16 +2,11 @@
 
 #include "CommonUIv1Character.h"
 
-#include "OwnScripts/Gameplay/InventoryComponent.h"
-#include "UObject/ConstructorHelpers.h"
+#include "OwnScripts/ViewModels/InventoryComponent.h"
 #include "Camera/CameraComponent.h"
-#include "Components/DecalComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
-#include "Materials/Material.h"
-#include "Engine/World.h"
 
 ACommonUIv1Character::ACommonUIv1Character()
 {
@@ -43,7 +38,7 @@ ACommonUIv1Character::ACommonUIv1Character()
 	TopDownCameraComponent->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
 	Inventory = CreateDefaultSubobject<UInventoryComponent>(TEXT("InventoryComponent"));
-	Inventory->SetSize(InventorySize);
+	Inventory->Init(InventorySize);
 
 	// Activate ticking in order to update the cursor every frame.
 	PrimaryActorTick.bCanEverTick = true;

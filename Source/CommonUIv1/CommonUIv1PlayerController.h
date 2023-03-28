@@ -11,7 +11,7 @@ class UNiagaraSystem;
 class UItemSlot;
 class UGameHUD;
 
-DECLARE_DELEGATE_RetVal_OneParam(UItemSlot*, FOnItemAddedSignature, UItemSlot*);
+DECLARE_DELEGATE_OneParam(FOnItemAddedSignature, UItemSlot*);
 DECLARE_MULTICAST_DELEGATE(FOnInventoryPressedSignature)
 
 UCLASS()
