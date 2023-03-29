@@ -5,6 +5,7 @@
 #include "Components/ActorComponent.h"
 #include "CommonUIv1/CommonUIv1PlayerController.h"
 #include "CommonUIv1/OwnScripts/Models/InventoryModel.h"
+#include "CommonUIv1/OwnScripts/Observer/Observer.h"
 #include "CommonUIv1/OwnScripts/UI/InventorySlot.h"
 
 
@@ -81,4 +82,41 @@ void UInventoryComponent::OnInventoryOpened() const
 {
 	OnShowInventoryDelegate.Broadcast();
 	UpdateUI();
+}
+
+void UInventoryComponent::Attach(FString eventType, IObserver* Observer)
+{
+	if(ObserversMap.Contains(eventType))
+	{
+		ObserversMap[eventType].Push(Observer);
+	}
+	else
+	{
+		ObserversMap.Add(eventType,TArray{Observer});
+	}
+}
+
+void UInventoryComponent::Detach(FString eventType, IObserver* Observer)
+{
+	if(ObserversMap.Contains(eventType))
+	{
+		for(int i = ObserversMap[eventType].Num() - 1; i >= 0; i--)
+		{
+			if(ObserversMap[eventType][i] == Observer)
+			{
+				ObserversMap[eventType].RemoveAt(i);
+			}
+		}
+	}
+}
+
+void UInventoryComponent::Notify(FString eventType) const
+{
+	if(ObserversMap.Contains(eventType))
+	{
+		for(IObserver* mapObserver : ObserversMap[eventType])
+		{
+			mapObserver->Update();
+		}
+	}
 }

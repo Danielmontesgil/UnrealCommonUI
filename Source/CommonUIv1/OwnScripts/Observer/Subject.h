@@ -24,7 +24,7 @@ class COMMONUIV1_API ISubject
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-	virtual void Attach(IObserver* observer)=0;
-	virtual void Detach(IObserver* observer)=0;
-	virtual void Notify()=0;
+	virtual void Attach(FString eventType, IObserver* observer)=0;
+	virtual void Detach(FString eventType, IObserver* observer)=0;
+	virtual void Notify(FString eventType) const =0;
 };

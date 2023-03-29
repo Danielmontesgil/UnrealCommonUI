@@ -22,21 +22,13 @@ public:
 	UInventoryModel();
 	
 	void Init(uint32 Size);
-	
 	UItemSlot* AddItem(UItemSlot* Slot);
-	
 	UItemSlot* GetSlotByIndex(const uint32 SlotIndex) const;
-
 	uint32 GetTotalQuantity(UInventoryItem* Item);
-
 	bool HasItem(UInventoryItem* Item) const;
-
 	bool RemoveAt(size_t SlotIndex);
-
 	bool RemoveItem(UItemSlot* Slot);
-
 	bool Swap(uint32 IndexOne, uint32 IndexTwo);
-
 	const TArray<UItemSlot*>& GetInventory() const { return ItemSlots; }
 
 private:

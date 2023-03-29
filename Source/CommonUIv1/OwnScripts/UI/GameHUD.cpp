@@ -9,6 +9,7 @@
 
 void UGameHUD::Init(UInventoryComponent* Inventory)
 {
+	Inventory->Attach(TEXT("OnShowInventoryDelegate"),this);
 	Inventory->OnShowInventoryDelegate.AddUObject(this, &UGameHUD::OnShowInventory);
 	Inventory->OnDrawInventorySlotDelegate.AddUObject(this,&UGameHUD::OnDrawInventorySlot);
 	InventoryContainer->SetVisibility(ESlateVisibility::Hidden);
@@ -41,4 +42,9 @@ void UGameHUD::OnDrawInventorySlot(const TArray<UItemSlot*>& ItemSlots) const
 			}
 		}
 	}
+}
+
+void UGameHUD::Update()
+{
+	
 }

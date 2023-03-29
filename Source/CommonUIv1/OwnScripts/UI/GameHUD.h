@@ -4,14 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "CommonUIv1/OwnScripts/Observer/Observer.h"
 #include "GameHUD.generated.h"
 
 class UItemSlot;
+
 /**
  * 
  */
 UCLASS()
-class COMMONUIV1_API UGameHUD : public UUserWidget
+class COMMONUIV1_API UGameHUD : public UUserWidget, public IObserver
 {
 	GENERATED_BODY()
 
@@ -32,4 +34,5 @@ protected:
 private:
 	void OnShowInventory() const;
 	void OnDrawInventorySlot(const TArray<UItemSlot*>& ItemSlots) const;
+	virtual void Update() override;
 };
