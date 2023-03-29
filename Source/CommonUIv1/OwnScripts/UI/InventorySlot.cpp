@@ -1,5 +1,6 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright 2023 Daniel Montes Gil.
 
+//Part of the View that shows each Slot on the inventory with its icon and quantity
 
 #include "InventorySlot.h"
 #include "Components/Image.h"

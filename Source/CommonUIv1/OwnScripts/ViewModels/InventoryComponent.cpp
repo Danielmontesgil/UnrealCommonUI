@@ -1,5 +1,7 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Copyright 2023 Daniel Montes Gil.
 
+// This class is the ViewModel for the inventory system, it handles the events that come from the Player and the View
+// it also communicates with the Model to updated the info properly
 
 #include "InventoryComponent.h"
 #include "Components/ActorComponent.h"

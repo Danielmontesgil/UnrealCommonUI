@@ -1,4 +1,6 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright 2023 Daniel Montes Gil.
+
+// Base class for Items in out game
 
 
 #include "ItemBase.h"

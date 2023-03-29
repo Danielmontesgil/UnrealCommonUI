@@ -1,4 +1,6 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright 2023 Daniel Montes Gil.
+
+// Specific inventory item that can be used from the Inventory
 
 
 #include "ConsumableItem.h"

@@ -1,4 +1,6 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Copyright 2023 Daniel Montes Gil.
+
+// Interface that allows us to keep reference to listeners in the Observer pattern
 
 #pragma once
 

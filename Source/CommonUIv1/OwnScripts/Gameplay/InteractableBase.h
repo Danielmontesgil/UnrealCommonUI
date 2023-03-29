@@ -1,4 +1,6 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright 2023 Daniel Montes Gil.
+
+// Base class for items that have a representation on world and can be collected for players
 
 #pragma once
 
@@ -27,23 +29,20 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-    
+	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interact")
 	void OnInteract();
-
 	virtual void OnInteract_Implementation();
-
 	virtual UConsumableItem* GetConsumable() const;
-
 	virtual uint32 GetItemQuantity() const;
 
 private:
 	UPROPERTY(EditDefaultsOnly)
 	UStaticMeshComponent* InteractableMesh;
-
+	
 	UPROPERTY(EditDefaultsOnly, Category="Item Data")
 	UConsumableItem* ConsumableComponent;
-
+	
 	UPROPERTY(EditAnywhere,  Category="Item Data")
 	uint32 ItemQuantity;
 

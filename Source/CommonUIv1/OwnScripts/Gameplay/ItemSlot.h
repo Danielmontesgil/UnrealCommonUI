@@ -1,9 +1,10 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Copyright 2023 Daniel Montes Gil.
+
+// This class is used on the Model to store all the items per Slot in the Inventory
 
 #pragma once
 
 #include "CoreMinimal.h"
-#include "InventoryItem.h"
 #include "UObject/Object.h"
 #include "ItemSlot.generated.h"
 
