@@ -7,7 +7,6 @@
 #include "Components/ActorComponent.h"
 #include "CommonUIv1/CommonUIv1PlayerController.h"
 #include "CommonUIv1/OwnScripts/Models/InventoryModel.h"
-#include "CommonUIv1/OwnScripts/Observer/Observer.h"
 #include "CommonUIv1/OwnScripts/UI/InventorySlot.h"
 
 
@@ -42,7 +41,7 @@ void UInventoryComponent::BeginPlay()
 	}
 }
 
-void UInventoryComponent::AddItem(UItemSlot* Slot)
+void UInventoryComponent::AddItem(UItemSlot* Slot) const
 {
 	if(InventoryModel->AddItem(Slot))
 	{
@@ -50,7 +49,7 @@ void UInventoryComponent::AddItem(UItemSlot* Slot)
 	}
 }
 
-void UInventoryComponent::RemoveAt(size_t SlotIndex)
+void UInventoryComponent::RemoveAt(size_t SlotIndex) const
 {
 	if(InventoryModel->RemoveAt(SlotIndex))
 	{
@@ -58,7 +57,7 @@ void UInventoryComponent::RemoveAt(size_t SlotIndex)
 	}
 }
 
-void UInventoryComponent::RemoveItem(UItemSlot* Slot)
+void UInventoryComponent::RemoveItem(UItemSlot* Slot) const
 {
 	if(InventoryModel->RemoveItem(Slot))
 	{
@@ -67,7 +66,7 @@ void UInventoryComponent::RemoveItem(UItemSlot* Slot)
 
 }
 
-void UInventoryComponent::Swap(uint32 IndexOne, uint32 IndexTwo)
+void UInventoryComponent::Swap(uint32 IndexOne, uint32 IndexTwo) const
 {
 	if(InventoryModel->Swap(IndexOne,IndexTwo))
 	{
@@ -84,41 +83,4 @@ void UInventoryComponent::OnInventoryOpened() const
 {
 	OnShowInventoryDelegate.Broadcast();
 	UpdateUI();
-}
-
-void UInventoryComponent::Attach(FString eventType, IObserver* Observer)
-{
-	if(ObserversMap.Contains(eventType))
-	{
-		ObserversMap[eventType].Push(Observer);
-	}
-	else
-	{
-		ObserversMap.Add(eventType,TArray{Observer});
-	}
-}
-
-void UInventoryComponent::Detach(FString eventType, IObserver* Observer)
-{
-	if(ObserversMap.Contains(eventType))
-	{
-		for(int i = ObserversMap[eventType].Num() - 1; i >= 0; i--)
-		{
-			if(ObserversMap[eventType][i] == Observer)
-			{
-				ObserversMap[eventType].RemoveAt(i);
-			}
-		}
-	}
-}
-
-void UInventoryComponent::Notify(FString eventType) const
-{
-	if(ObserversMap.Contains(eventType))
-	{
-		for(IObserver* mapObserver : ObserversMap[eventType])
-		{
-			mapObserver->Update();
-		}
-	}
 }

@@ -3,6 +3,7 @@
 // This is the Model that stores, and manipulate the Inventory Info
 
 #include "InventoryModel.h"
+#include "CommonUIv1/OwnScripts/Gameplay/InventoryItem.h"
 #include "CommonUIv1/OwnScripts/Gameplay/ItemSlot.h"
 
 

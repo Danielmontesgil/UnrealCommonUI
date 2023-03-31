@@ -6,7 +6,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "CommonUIv1/OwnScripts/Observer/Subject.h"
 #include "InventoryComponent.generated.h"
 
 class UItemSlot;
@@ -18,7 +17,7 @@ DECLARE_MULTICAST_DELEGATE_OneParam(FOnDrawInventorySignature, const TArray<UIte
 
 
 UCLASS()
-class COMMONUIV1_API UInventoryComponent : public UActorComponent, public ISubject
+class COMMONUIV1_API UInventoryComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
@@ -36,19 +35,14 @@ protected:
 public:
 	// Inventory methods
 	void Init(uint32 Size);
-	void AddItem(UItemSlot* Slot);
-	void RemoveAt(size_t SlotIndex);
-	void RemoveItem(UItemSlot* Slot);
-	void Swap(uint32 IndexOne, uint32 IndexTwo);
+	void AddItem(UItemSlot* Slot) const;
+	void RemoveAt(size_t SlotIndex) const;
+	void RemoveItem(UItemSlot* Slot) const;
+	void Swap(uint32 IndexOne, uint32 IndexTwo) const;
 
 	//Inventory UI methods
 	void UpdateUI() const;
 	void OnInventoryOpened() const;
-
-	// ISubject interface implementation
-	virtual void Attach(FString eventType, IObserver* Observer) override;
-	virtual void Detach(FString eventType, IObserver* Observer) override;
-	virtual void Notify(FString eventType) const override;
 
 private:
 
@@ -57,6 +51,4 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category="Model", meta = (AllowPrivateAccess = "true"))
 	class UInventoryModel* InventoryModel;
-
-	TMap<FString, TArray<IObserver*>> ObserversMap;
 };
