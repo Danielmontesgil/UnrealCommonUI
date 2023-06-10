@@ -8,6 +8,7 @@
 #include "InventoryItem.h"
 #include "ConsumableItem.generated.h"
 
+struct FItemData;
 /**
  * 
  */
@@ -17,9 +18,12 @@ class COMMONUIV1_API UConsumableItem : public UInventoryItem
 	GENERATED_BODY()
 	
 public:
+	UConsumableItem();
 	virtual FString GetInfoDisplayText() override;
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Consumable Item");
     FString UseText = FString("Does something, maybe?");
+
+	FItemData* Item;
 };

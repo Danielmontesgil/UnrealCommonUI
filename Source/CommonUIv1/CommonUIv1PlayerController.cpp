@@ -10,6 +10,7 @@
 #include "OwnScripts/Gameplay/ItemSlot.h"
 #include "Blueprint/UserWidget.h"
 #include "OwnScripts/Gameplay/ConsumableItem.h"
+#include "OwnScripts/Gameplay/ItemDataBase.h"
 #include "OwnScripts/UI/GameHUD.h"
 
 ACommonUIv1PlayerController::ACommonUIv1PlayerController()
@@ -29,6 +30,8 @@ void ACommonUIv1PlayerController::BeginPlay()
 	Super::BeginPlay();
 
 	InitGameHUD();
+
+	ItemDataBase::LoadItems();
 }
 
 void ACommonUIv1PlayerController::PlayerTick(float DeltaTime)

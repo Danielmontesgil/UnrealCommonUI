@@ -5,6 +5,28 @@
 
 #include "ConsumableItem.h"
 
+#include "ItemDataBase.h"
+
+UConsumableItem::UConsumableItem()
+{
+	Super::PostInitProperties();
+
+	Item = ItemDataBase::GetRandomItem();
+
+	if(Item)
+	{
+		Name = Item->Name;
+		Icon = Item->Icon;
+		SellPrice = Item->SellPrice;
+		MaxStack = Item->MaxStack;
+		UseText = Item->UseText;
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("No Item from ItemDataBase, using Inspector Values"));
+	}
+}
+
 FString UConsumableItem::GetInfoDisplayText()
 {
 	FString Text = FString::Printf(TEXT("%s\nUse: %s\nMaxStack: %u\nSellPrice: %u Gold\n0"),*Name,*UseText,MaxStack,SellPrice);
