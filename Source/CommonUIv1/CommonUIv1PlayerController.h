@@ -10,6 +10,7 @@
 class UNiagaraSystem;
 class UItemSlot;
 class UGameHUD;
+class AItemSpawner;
 
 DECLARE_DELEGATE_OneParam(FOnItemAddedSignature, UItemSlot*);
 DECLARE_MULTICAST_DELEGATE(FOnInventoryPressedSignature)
@@ -67,6 +68,12 @@ private:
 
 	UPROPERTY()
 	UGameHUD* GameHUD;
+
+	UPROPERTY()
+	AItemSpawner* ItemSpawner;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AItemSpawner> ItemSpawnerClass;
 };
 
 

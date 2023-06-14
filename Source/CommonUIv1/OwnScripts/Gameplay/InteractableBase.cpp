@@ -5,6 +5,7 @@
 #include "InteractableBase.h"
 #include "Kismet/GameplayStatics.h"
 #include "ConsumableItem.h"
+#include "ItemDataBase.h"
 
 // Sets default values
 AInteractableBase::AInteractableBase()
@@ -14,6 +15,13 @@ AInteractableBase::AInteractableBase()
 
 	InteractableMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Collision Mesh"));
 	RootComponent = InteractableMesh;
+	Item = UItemDataBase::GetRandomItem();
+	Consumable = NewObject<UConsumableItem>();
+	if(Item)
+	{
+		Consumable->Init(Item);
+		ItemQuantity=Item->ItemQuantity;
+	}
 }
 
 // Called when the game starts or when spawned
@@ -21,7 +29,6 @@ void AInteractableBase::BeginPlay()
 {
 	Super::BeginPlay();
 
-	ConsumableComponent = Cast<UConsumableItem>(GetComponentByClass(UConsumableItem::StaticClass()));
 	bItemCollected = false;
 }
 
@@ -51,7 +58,7 @@ uint32 AInteractableBase::GetItemQuantity() const
 
 UConsumableItem* AInteractableBase::GetConsumable() const
 {
-	return ConsumableComponent;
+	return Consumable;
 }
 
 void AInteractableBase::OnCollected() const

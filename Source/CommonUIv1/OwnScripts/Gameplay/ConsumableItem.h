@@ -18,12 +18,10 @@ class COMMONUIV1_API UConsumableItem : public UInventoryItem
 	GENERATED_BODY()
 	
 public:
-	UConsumableItem();
+	void Init(FItemData* Item);
 	virtual FString GetInfoDisplayText() override;
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Consumable Item");
     FString UseText = FString("Does something, maybe?");
-
-	FItemData* Item;
 };

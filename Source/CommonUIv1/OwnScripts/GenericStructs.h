@@ -26,3 +26,12 @@ struct FItemData : public FTableRowBase
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString UseText = FString("Does something, maybe?");
 };
+
+USTRUCT(BlueprintType)
+struct FItemPositionsData : public FTableRowBase
+{
+	GENERATED_USTRUCT_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FVector> Positions;
+};

@@ -1,9 +1,12 @@
 ﻿#pragma once
 
 #include "CommonUIv1/OwnScripts/GenericStructs.h"
+#include "ItemDataBase.generated.h"
 
-class ItemDataBase
+UCLASS()
+class UItemDataBase : public UObject
 {
+	GENERATED_BODY()
 public:
 	static void LoadItems();
 	static FItemData* GetItemByName(const FString& Name);

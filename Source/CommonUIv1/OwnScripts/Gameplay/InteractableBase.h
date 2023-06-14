@@ -9,6 +9,7 @@
 #include "InteractableBase.generated.h"
 
 class UConsumableItem;
+struct FItemData;
 
 UCLASS()
 class COMMONUIV1_API AInteractableBase : public AActor
@@ -39,9 +40,11 @@ public:
 private:
 	UPROPERTY(EditDefaultsOnly)
 	UStaticMeshComponent* InteractableMesh;
+
+	FItemData* Item;
 	
-	UPROPERTY(EditDefaultsOnly, Category="Item Data")
-	UConsumableItem* ConsumableComponent;
+	UPROPERTY(VisibleAnywhere, Category="Item Data")
+	UConsumableItem* Consumable;
 	
 	UPROPERTY(EditAnywhere,  Category="Item Data")
 	uint32 ItemQuantity;

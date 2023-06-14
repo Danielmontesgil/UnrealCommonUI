@@ -11,7 +11,7 @@
  * 
  */
 UCLASS()
-class COMMONUIV1_API UItemBase : public UActorComponent
+class COMMONUIV1_API UItemBase : public UObject
 {
 	GENERATED_BODY()
 	

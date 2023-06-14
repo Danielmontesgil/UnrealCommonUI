@@ -1,12 +1,12 @@
 ﻿#include "ItemDataBase.h"
 #include <random>
 
-TArray<FItemData*> ItemDataBase::Items;
-bool ItemDataBase::IsLoaded = false;
+TArray<FItemData*> UItemDataBase::Items;
+bool UItemDataBase::IsLoaded = false;
 
-void ItemDataBase::LoadItems()
+void UItemDataBase::LoadItems()
 {
-	const FString DataTablePath = FPaths::Combine(TEXT("/Game/Dani/Blueprints/ItemData"));
+	const FString DataTablePath = FPaths::Combine(TEXT("/Game/Dani/Data/ItemData"));
 	const FSoftObjectPath DataTableReference(DataTablePath);
 
 	if(const UDataTable* DataTable = Cast<UDataTable>(DataTableReference.TryLoad()))
@@ -20,7 +20,7 @@ void ItemDataBase::LoadItems()
 	}
 }
 
-FItemData* ItemDataBase::GetItemByName(const FString& Name)
+FItemData* UItemDataBase::GetItemByName(const FString& Name)
 {
 	CheckStatus();
 
@@ -35,9 +35,14 @@ FItemData* ItemDataBase::GetItemByName(const FString& Name)
 	return nullptr;
 }
 
-FItemData* ItemDataBase::GetRandomItem()
+FItemData* UItemDataBase::GetRandomItem()
 {
 	CheckStatus();
+
+	if(Items.Num() <= 0)
+	{
+		return nullptr;
+	}
 	
 	if(Items.Num() == 1)
 	{
@@ -46,11 +51,10 @@ FItemData* ItemDataBase::GetRandomItem()
 	
 	const int randomIndex = rand() % Items.Num();
 
-	// Get the random object from the array
 	return Items[randomIndex];
 }
 
-void ItemDataBase::CheckStatus()
+void UItemDataBase::CheckStatus()
 {
 	if(!IsLoaded)
 	{

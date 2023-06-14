@@ -7,12 +7,8 @@
 
 #include "ItemDataBase.h"
 
-UConsumableItem::UConsumableItem()
+void UConsumableItem::Init(FItemData* Item)
 {
-	Super::PostInitProperties();
-
-	Item = ItemDataBase::GetRandomItem();
-
 	if(Item)
 	{
 		Name = Item->Name;

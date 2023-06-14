@@ -11,6 +11,7 @@
 #include "Blueprint/UserWidget.h"
 #include "OwnScripts/Gameplay/ConsumableItem.h"
 #include "OwnScripts/Gameplay/ItemDataBase.h"
+#include "OwnScripts/Gameplay/ItemSpawner.h"
 #include "OwnScripts/UI/GameHUD.h"
 
 ACommonUIv1PlayerController::ACommonUIv1PlayerController()
@@ -31,7 +32,14 @@ void ACommonUIv1PlayerController::BeginPlay()
 
 	InitGameHUD();
 
-	ItemDataBase::LoadItems();
+	UItemDataBase::LoadItems();
+
+	ItemSpawner = GetWorld()->SpawnActor<AItemSpawner>(ItemSpawnerClass);
+
+	if(ItemSpawner)
+	{
+		ItemSpawner->SpawnItems(5);
+	}
 }
 
 void ACommonUIv1PlayerController::PlayerTick(float DeltaTime)
@@ -109,7 +117,7 @@ void ACommonUIv1PlayerController::OnSetDestinationPressed()
 	// We flag that the input is being pressed
 	bInputPressed = true;
 	// Just in case the character was moving because of a previous short press we stop it
-	StopMovement();
+	StopMovement();	
 }
 
 void ACommonUIv1PlayerController::OnSetDestinationReleased()
