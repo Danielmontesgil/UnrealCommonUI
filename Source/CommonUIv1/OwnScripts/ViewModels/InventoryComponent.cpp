@@ -22,8 +22,7 @@ UInventoryComponent::UInventoryComponent()
 
 void UInventoryComponent::Init(uint32 Size)
 {
-	InventoryModel = NewObject<UInventoryModel>();
-	InventoryModel->Init(Size);
+	
 }
 
 
@@ -39,6 +38,9 @@ void UInventoryComponent::BeginPlay()
 		PlayerController->OnInventoryPressedDelegate.AddUObject(this, &UInventoryComponent::OnInventoryOpened);
 		PlayerController->OnItemAddedDelegate.BindUObject(this,&UInventoryComponent::AddItem);
 	}
+
+	InventoryModel = NewObject<UInventoryModel>();
+	InventoryModel->Init(5);
 }
 
 void UInventoryComponent::AddItem(UItemSlot* Slot) const

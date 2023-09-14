@@ -4,8 +4,7 @@
 
 
 #include "ConsumableItem.h"
-
-#include "ItemDataBase.h"
+#include "CommonUIv1/OwnScripts/GenericStructs.h"
 
 void UConsumableItem::Init(FItemData* Item)
 {

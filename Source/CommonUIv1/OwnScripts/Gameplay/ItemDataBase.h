@@ -1,7 +1,8 @@
 ﻿#pragma once
 
-#include "CommonUIv1/OwnScripts/GenericStructs.h"
 #include "ItemDataBase.generated.h"
+
+struct FItemData;
 
 UCLASS()
 class UItemDataBase : public UObject

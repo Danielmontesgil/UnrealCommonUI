@@ -1,7 +1,6 @@
 ﻿#include "ItemSpawner.h"
 #include "InteractableBase.h"
 #include "CommonUIv1/OwnScripts/GenericStructs.h"
-#include "Engine/DataTable.h"
 
 AItemSpawner::AItemSpawner()
 {

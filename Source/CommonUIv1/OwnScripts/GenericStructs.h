@@ -12,7 +12,7 @@ struct FItemData : public FTableRowBase
 	FString Name;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UTexture2D* Icon;
+	UTexture2D* Icon = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int SellPrice = 1;

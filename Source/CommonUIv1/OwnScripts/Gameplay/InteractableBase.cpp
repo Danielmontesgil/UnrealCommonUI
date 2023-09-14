@@ -6,6 +6,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "ConsumableItem.h"
 #include "ItemDataBase.h"
+#include "CommonUIv1/OwnScripts/GenericStructs.h"
 
 // Sets default values
 AInteractableBase::AInteractableBase()
