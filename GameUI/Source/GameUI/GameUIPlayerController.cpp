@@ -10,6 +10,7 @@
 #include "EnhancedInputComponent.h"
 #include "InputActionValue.h"
 #include "EnhancedInputSubsystems.h"
+#include "Blueprint/UserWidget.h"
 #include "Engine/LocalPlayer.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
@@ -26,6 +27,8 @@ void AGameUIPlayerController::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
+
+	InitMainUI();
 
 	//Add Input Mapping Context
 	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
@@ -123,3 +126,15 @@ void AGameUIPlayerController::OnTouchReleased()
 	bIsTouch = false;
 	OnSetDestinationReleased();
 }
+
+void AGameUIPlayerController::InitMainUI()
+{
+	MainUI = Cast<UUserWidget>(CreateWidget(this, MainUIClass));
+	
+	if(MainUI)
+	{
+		MainUI->AddToViewport();
+		MainUI->SetOwningPlayer(this);
+	}
+}
+

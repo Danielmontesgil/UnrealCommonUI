@@ -11,6 +11,7 @@
 class UNiagaraSystem;
 class UInputMappingContext;
 class UInputAction;
+class UUserWidget;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -50,6 +51,7 @@ protected:
 	
 	// To add mapping context
 	virtual void BeginPlay();
+	virtual void InitMainUI();
 
 	/** Input handlers for SetDestination action. */
 	void OnInputStarted();
@@ -63,6 +65,12 @@ private:
 
 	bool bIsTouch; // Is it a touch device
 	float FollowTime; // For how long it has been pressed
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UUserWidget> MainUIClass;
+
+	UPROPERTY()
+	UUserWidget* MainUI;
 };
 
 
