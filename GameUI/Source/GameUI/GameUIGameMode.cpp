@@ -2,7 +2,6 @@
 
 #include "GameUIGameMode.h"
 #include "GameUIPlayerController.h"
-#include "GameUICharacter.h"
 #include "UObject/ConstructorHelpers.h"
 
 AGameUIGameMode::AGameUIGameMode()

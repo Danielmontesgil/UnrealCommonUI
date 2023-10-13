@@ -3,19 +3,15 @@
 #include "GameUIPlayerController.h"
 #include "GameFramework/Pawn.h"
 #include "Blueprint/AIBlueprintHelperLibrary.h"
-#include "NiagaraSystem.h"
 #include "NiagaraFunctionLibrary.h"
-#include "GameUICharacter.h"
 #include "Engine/World.h"
 #include "EnhancedInputComponent.h"
-#include "InputActionValue.h"
 #include "EnhancedInputSubsystems.h"
 #include "Blueprint/UserWidget.h"
 #include "Engine/LocalPlayer.h"
 #include "Scripts/InventoryView.h"
 #include "Scripts/MainUI.h"
 #include "Scripts/GameHUD.h"
-#include "Scripts\InputModeHelper.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
