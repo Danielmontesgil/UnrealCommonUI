@@ -10,6 +10,6 @@ public class GameUI : ModuleRules
 
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "NavigationSystem", "AIModule", "Niagara", "EnhancedInput" });
         
-        PublicDependencyModuleNames.AddRange(new string[] { "UMG" });
+        PublicDependencyModuleNames.AddRange(new string[] { "UMG", "Slate" });
     }
 }

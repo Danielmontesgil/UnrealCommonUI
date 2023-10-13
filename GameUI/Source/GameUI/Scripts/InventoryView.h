@@ -3,19 +3,21 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "CommonActivatableWidget.h"
+#include "UIWidgetBase.h"
 #include "InventoryView.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class GAMEUI_API UInventoryView : public UCommonActivatableWidget
+class GAMEUI_API UInventoryView : public UUIWidgetBase
 {
 	GENERATED_BODY()
 
 public:
+
+	UInventoryView(const FObjectInitializer& ObjectInitializer);
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<UCommonActivatableWidget*> InventorySlots;
-	
 };

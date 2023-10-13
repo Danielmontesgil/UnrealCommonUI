@@ -7,11 +7,13 @@
 #include "GameFramework/PlayerController.h"
 #include "GameUIPlayerController.generated.h"
 
+class UGameHUD;
 /** Forward declaration to improve compiling times */
 class UNiagaraSystem;
 class UInputMappingContext;
 class UInputAction;
-class UUserWidget;
+class UMainUI;
+class UInventoryView;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -43,6 +45,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	UInputAction* SetDestinationTouchAction;
 
+	/** Inventory Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
+	UInputAction* InventoryAction;
+
 protected:
 	/** True if the controlled character should navigate to the mouse cursor. */
 	uint32 bMoveToMouseCursor : 1;
@@ -52,6 +58,7 @@ protected:
 	// To add mapping context
 	virtual void BeginPlay();
 	virtual void InitMainUI();
+	virtual void AddHUD();
 
 	/** Input handlers for SetDestination action. */
 	void OnInputStarted();
@@ -59,18 +66,31 @@ protected:
 	void OnSetDestinationReleased();
 	void OnTouchTriggered();
 	void OnTouchReleased();
+	void OnInventoryTriggered();
 
 private:
 	FVector CachedDestination;
 
 	bool bIsTouch; // Is it a touch device
 	float FollowTime; // For how long it has been pressed
+	
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UMainUI> MainUIClass;
+	
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UInventoryView> InventoryViewClass;
 
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<UUserWidget> MainUIClass;
+	TSubclassOf<UGameHUD> GameHUDClass;
+	
+	UPROPERTY()
+	UMainUI* MainUI;
+	
+	UPROPERTY()
+	UInventoryView* InventoryView;
 
 	UPROPERTY()
-	UUserWidget* MainUI;
+	UGameHUD* GameHUD;
 };
 
 

@@ -12,6 +12,10 @@
 #include "EnhancedInputSubsystems.h"
 #include "Blueprint/UserWidget.h"
 #include "Engine/LocalPlayer.h"
+#include "Scripts/InventoryView.h"
+#include "Scripts/MainUI.h"
+#include "Scripts/GameHUD.h"
+#include "Scripts\InputModeHelper.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -35,6 +39,8 @@ void AGameUIPlayerController::BeginPlay()
 	{
 		Subsystem->AddMappingContext(DefaultMappingContext, 0);
 	}
+
+	AddHUD();
 }
 
 void AGameUIPlayerController::SetupInputComponent()
@@ -56,6 +62,9 @@ void AGameUIPlayerController::SetupInputComponent()
 		EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Triggered, this, &AGameUIPlayerController::OnTouchTriggered);
 		EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Completed, this, &AGameUIPlayerController::OnTouchReleased);
 		EnhancedInputComponent->BindAction(SetDestinationTouchAction, ETriggerEvent::Canceled, this, &AGameUIPlayerController::OnTouchReleased);
+
+		// Setup UI input events
+		EnhancedInputComponent->BindAction(InventoryAction, ETriggerEvent::Triggered, this, &AGameUIPlayerController::OnInventoryTriggered);
 	}
 	else
 	{
@@ -129,12 +138,38 @@ void AGameUIPlayerController::OnTouchReleased()
 
 void AGameUIPlayerController::InitMainUI()
 {
-	MainUI = Cast<UUserWidget>(CreateWidget(this, MainUIClass));
+	MainUI = Cast<UMainUI>(CreateWidget(this, MainUIClass));
 	
 	if(MainUI)
 	{
 		MainUI->AddToViewport();
 		MainUI->SetOwningPlayer(this);
+
+#if WITH_EDITOR
+		if(GIsEditor && GetGameInstance()->GetLocalPlayers()[0]->IsPrimaryPlayer())
+		{
+			// So our controller will work in PIE without needing to click in the viewport
+			FSlateApplication::Get().SetUserFocusToGameViewport(0);
+		}
+#endif
 	}
 }
+
+void AGameUIPlayerController::AddHUD()
+{
+	if(MainUI)
+	{
+		GameHUD = Cast<UGameHUD>(MainUI->GameStack->AddWidget<UCommonActivatableWidget>(GameHUDClass));
+	}
+}
+
+
+void AGameUIPlayerController::OnInventoryTriggered()
+{
+	if(MainUI)
+	{
+		InventoryView = MainUI->MenuStack->AddWidget<UInventoryView>(InventoryViewClass);
+	}
+}
+
 

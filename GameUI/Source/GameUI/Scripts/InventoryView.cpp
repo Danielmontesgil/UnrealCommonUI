@@ -3,3 +3,7 @@
 
 #include "GameUI/Scripts/InventoryView.h"
 
+UInventoryView::UInventoryView(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
+{
+}
