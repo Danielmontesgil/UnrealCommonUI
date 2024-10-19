@@ -18,3 +18,6 @@ larger-scale projects.
 After establishing the UI, I'll expand the project to include **game mechanics**, creating a foundation for more
 interactive features. This modular approach will allow me to continually build upon the project as I learn and develop
 new skills.
+
+---
+For more about me and my portfolio, visit [my personal website](https://danielmontesgil.github.io).
