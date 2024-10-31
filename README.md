@@ -20,4 +20,4 @@ interactive features. This modular approach will allow me to continually build u
 new skills.
 
 ---
-For more about me and my portfolio, visit [my personal website](https://danielmontesgil.github.io).
+For more about me and my portfolio, visit [My personal website](https://danielmontesgil.github.io).
