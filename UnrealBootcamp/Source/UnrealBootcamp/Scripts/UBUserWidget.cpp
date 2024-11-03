@@ -1,3 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// © 2024 Daniel Montes Gil - dmontesgil@gmail.com All rights reserved.
 
 #include "UBUserWidget.h"

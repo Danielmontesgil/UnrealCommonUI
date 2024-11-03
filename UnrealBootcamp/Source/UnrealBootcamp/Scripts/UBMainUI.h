@@ -1,4 +1,4 @@
-// © 2024 Daniel Montes Gil - dmontesgil@gmail.comAll rights reserved.
+// © 2024 Daniel Montes Gil - dmontesgil@gmail.com All rights reserved.
 
 #pragma once
 
