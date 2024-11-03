@@ -4,17 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "Subsystems/GameInstanceSubsystem.h"
-#include "UIManagerSubsystem.generated.h"
+#include "UBUIManagerSubsystem.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class UNREALBOOTCAMP_API UUIManagerSubsystem : public UGameInstanceSubsystem
+class UNREALBOOTCAMP_API UUBUIManagerSubsystem : public UGameInstanceSubsystem
 {
 	GENERATED_BODY()
 
 public:
 	UFUNCTION(BlueprintCallable, Category="UI")
-	void CreateWidget(const TSubclassOf<class UUserWidget> MainMenuClass);
+	void InstantiateWidget(const TSubclassOf<class UUserWidget> MainMenuClass);
 };
