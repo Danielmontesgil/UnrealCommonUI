@@ -7,6 +7,7 @@
 #include "Logging/LogMacros.h"
 #include "UnrealBootcampCharacter.generated.h"
 
+class UUBUserWidget;
 class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
@@ -43,6 +44,9 @@ class AUnrealBootcampCharacter : public ACharacter
 	/** Look Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<UUBUserWidget> MainUI;
 
 public:
 	AUnrealBootcampCharacter();

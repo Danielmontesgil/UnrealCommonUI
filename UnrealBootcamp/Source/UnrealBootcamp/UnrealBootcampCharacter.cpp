@@ -10,6 +10,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "Scripts/UBUIManagerSubsystem.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -58,6 +59,11 @@ void AUnrealBootcampCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
+
+	if(UUBUIManagerSubsystem* UIManager = GetGameInstance()->GetSubsystem<UUBUIManagerSubsystem>())
+	{
+		UIManager->InstantiateWidget(MainUI);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
