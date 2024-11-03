@@ -16,5 +16,5 @@ class UNREALBOOTCAMP_API UUBUIManagerSubsystem : public UGameInstanceSubsystem
 
 public:
 	UFUNCTION(BlueprintCallable, Category="UI")
-	void InstantiateWidget(const TSubclassOf<class UUserWidget> MainMenuClass);
+	void InstantiateWidget(const TSubclassOf<class UUBUserWidget> WidgetToCreateClass);
 };
