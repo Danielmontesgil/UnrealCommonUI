@@ -16,10 +16,8 @@ class UNREALBOOTCAMP_API UUBSimpleBar : public UUBUserWidget
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	FLinearColor BarColor;
 	
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta=(ClampMin="0", ClampMax="1", UIMin="0", UIMax="100"))
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="Appearence", meta=(ClampMin="0", ClampMax="1", UIMin="0", UIMax="100"))
 	float Percentage;
 
 protected:

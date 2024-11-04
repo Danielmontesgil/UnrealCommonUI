@@ -8,5 +8,4 @@
 void UUBSimpleBar::NativePreConstruct()
 {
 	ProgressBar->SetPercent(Percentage);
-	ProgressBar->SetFillColorAndOpacity(BarColor);
 }
