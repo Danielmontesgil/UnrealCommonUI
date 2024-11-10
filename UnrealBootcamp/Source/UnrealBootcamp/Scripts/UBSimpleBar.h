@@ -20,12 +20,10 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="Appearence", meta=(ClampMin="0", ClampMax="1", UIMin="0", UIMax="100"))
 	float Percentage;
 
+	virtual void SynchronizeProperties() override;
+	
 protected:
 	
 	UPROPERTY(BlueprintReadWrite, meta=(BindWidget))
 	TObjectPtr<UProgressBar> ProgressBar;
-
-	UFUNCTION()
-	virtual void NativePreConstruct() override;
-	
 };

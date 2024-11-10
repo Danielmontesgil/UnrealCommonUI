@@ -5,7 +5,11 @@
 
 #include "Components/ProgressBar.h"
 
-void UUBSimpleBar::NativePreConstruct()
+void UUBSimpleBar::SynchronizeProperties()
 {
-	ProgressBar->SetPercent(Percentage);
+	if(ProgressBar)
+	{
+		ProgressBar->SetPercent(Percentage);
+		ProgressBar->SetFillColorAndOpacity(GetColorAndOpacity());
+	}
 }
