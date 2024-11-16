@@ -7,5 +7,5 @@
 void UUBSimpleText::SynchronizeProperties()
 {
 	TextBlock->SetText(Text);
-	// TextBlock->SetFont(Font);
+	TextBlock->SetFont(Font);
 }
