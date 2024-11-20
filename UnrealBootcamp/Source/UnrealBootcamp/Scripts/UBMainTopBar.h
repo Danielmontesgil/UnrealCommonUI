@@ -6,6 +6,7 @@
 #include "UBUserWidget.h"
 #include "UBMainTopBar.generated.h"
 
+class UUBTextBlock;
 class UUBSimpleText;
 /**
  * 
@@ -17,32 +18,32 @@ class UNREALBOOTCAMP_API UUBMainTopBar : public UUBUserWidget
 
 public:
 	UPROPERTY(BlueprintReadWrite, Category = "UI")
-	UUBSimpleText* TimerLabelText;
+	UUBTextBlock* TimerLabelText;
 
 	UPROPERTY(BlueprintReadWrite, Category = "UI", meta = (BindWidget))
-	UUBSimpleText* TimerText;
+	UUBTextBlock* TimerText;
 
 	UPROPERTY(BlueprintReadWrite, Category = "UI")
-	UUBSimpleText* KillsLabelText;
+	UUBTextBlock* KillsLabelText;
 
 	UPROPERTY(BlueprintReadWrite, Category = "UI", meta = (BindWidget))
-	UUBSimpleText* KillsText;
+	UUBTextBlock* KillsText;
 
 	UPROPERTY(BlueprintReadWrite, Category = "UI")
-	UUBSimpleText* EnemyKillsLabelText;
+	UUBTextBlock* EnemyKillsLabelText;
 
 	UPROPERTY(BlueprintReadWrite, Category = "UI", meta = (BindWidget))
-	UUBSimpleText* EnemyKillsText;
+	UUBTextBlock* EnemyKillsText;
 
 	UPROPERTY(BlueprintReadWrite, Category = "UI")
-	UUBSimpleText* PointsLabelText;
+	UUBTextBlock* PointsLabelText;
 
 	UPROPERTY(blueprintReadWrite, Category = "UI", meta = (BindWidget))
-	UUBSimpleText* PointsText;
+	UUBTextBlock* PointsText;
 
 	UPROPERTY(BlueprintReadWrite, Category = "UI")
-	UUBSimpleText* EnemyPointsLabelText;
+	UUBTextBlock* EnemyPointsLabelText;
 
 	UPROPERTY(BlueprintReadWrite, Category = "UI", meta = (BindWidget))
-	UUBSimpleText* EnemyPointsText;
+	UUBTextBlock* EnemyPointsText;
 };
