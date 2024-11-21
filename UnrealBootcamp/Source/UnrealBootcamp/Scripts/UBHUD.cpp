@@ -9,10 +9,13 @@
 void AUBHUD::ShowMainMenu()
 {
 	// Make widget owned by our PlayerController
-	APlayerController* PC = Cast<APlayerController>(GetOwner());
-	MainMenu = CreateWidget<UUserWidget>(PC, MainMenuClass);
+	if(MainMenuClass)
+	{
+		APlayerController* PC = Cast<APlayerController>(GetOwner());
+		MainMenu = CreateWidget<UUserWidget>(PC, MainMenuClass);
 
-	MainMenu->AddToViewport();
+		MainMenu->AddToViewport();
+	}
 }
 
 void AUBHUD::HideMainMenu()
