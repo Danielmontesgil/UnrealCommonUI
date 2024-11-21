@@ -6,6 +6,8 @@
 #include "UBUserWidget.h"
 #include "UBSimpleButton.generated.h"
 
+class UUBTextBlock;
+class UUBImage;
 /**
  * 
  */
@@ -16,9 +18,17 @@ class UNREALBOOTCAMP_API UUBSimpleButton : public UUBUserWidget
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Button Properties", meta = (ExposeOnSpawn = "true"))
-	UTexture2D* ButtonImage;
+	FSlateBrush ButtonBrush;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Button Properties", meta = (ExposeOnSpawn = "true"))
 	FText ButtonText;
 
+	virtual void SynchronizeProperties() override;
+
+private:
+	UPROPERTY(meta=(BindWidgetOptional))
+	UUBImage* Image;
+
+	UPROPERTY(meta=(BindWidget))
+	UUBTextBlock* TextBlock;
 };
