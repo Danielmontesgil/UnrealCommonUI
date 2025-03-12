@@ -13,7 +13,6 @@ void UStealthStackWidget::PushWidget(const TSubclassOf<UCommonActivatableWidget>
 	case EWidgetStack::MenuStack:
 		MenuStack->AddWidget<UCommonActivatableWidget>(WidgetToPush);
 		break;
-
 	case EWidgetStack::PopUpStack:
 		PopUpStack->AddWidget<UCommonActivatableWidget>(WidgetToPush);
 		break;

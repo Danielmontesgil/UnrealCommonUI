@@ -12,6 +12,13 @@ void AMainMenuHUD::BeginPlay()
 	{
 		return;
 	}
+
+	APlayerController* PlayerController = GetOwningPlayerController();
+	if(PlayerController)
+	{
+		PlayerController->SetInputMode(FInputModeUIOnly());
+		PlayerController->SetShowMouseCursor(true);
+	}
 	
 	StealthStackWidget = Cast<UStealthStackWidget>(CreateWidget(GetOwningPlayerController(), StealthStackClass));
 	if(StealthStackWidget)

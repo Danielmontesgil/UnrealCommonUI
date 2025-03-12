@@ -25,4 +25,6 @@ private:
 
 	UPROPERTY(meta = (BindWidget))
 	UCommonTextBlock* PopUpText;
+
+	virtual void NativeOnActivated() override;
 };

@@ -31,5 +31,6 @@ private:
 protected:
 	virtual void BeginPlay() override;
 
+public:
 	virtual void PushWidget(const TSubclassOf<UCommonActivatableWidget> &WidgetToPush, const EWidgetStack WidgetStack);
 };

@@ -26,11 +26,12 @@ class STEALTH_API UStealthStackWidget : public UCommonUserWidget
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, meta=(BindWidget))
+	UPROPERTY(EditAnywhere, meta=(BindWidget), BlueprintReadWrite)
 	UCommonActivatableWidgetStack* MenuStack;
 
-	UPROPERTY(EditAnywhere, meta = (BindWidget))
+	UPROPERTY(EditAnywhere, meta = (BindWidget), BlueprintReadWrite)
 	UCommonActivatableWidgetStack* PopUpStack;
 
+	UFUNCTION(BlueprintCallable)
 	void PushWidget(const TSubclassOf<UCommonActivatableWidget> &WidgetToPush, const EWidgetStack WidgetStack) const;
 };
