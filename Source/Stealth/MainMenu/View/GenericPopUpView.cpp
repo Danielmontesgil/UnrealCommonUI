@@ -2,7 +2,3 @@
 
 
 #include "GenericPopUpView.h"
-
-void UGenericPopUpView::NativeOnActivated()
-{
-}

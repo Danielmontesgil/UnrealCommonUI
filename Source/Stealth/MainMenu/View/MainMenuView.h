@@ -27,6 +27,9 @@ private:
 	UFUNCTION()
 	void OnPlayButtonClicked();
 
+	UFUNCTION()
+	void OnExitButtonClicked();
+
 public:
 	UPROPERTY(EditAnywhere, Category = "UI", meta = (BindWidget))
 	UStealthCommonButton* PlayButton;
