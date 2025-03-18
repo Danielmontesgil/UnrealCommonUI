@@ -85,6 +85,9 @@ void AStealthCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AStealthCharacter::Look);
+
+		// Inventory
+		EnhancedInputComponent->BindAction(InventoryAction, ETriggerEvent::Triggered, this, &AStealthCharacter::OpenInventory);
 	}
 	else
 	{
@@ -125,5 +128,20 @@ void AStealthCharacter::Look(const FInputActionValue& Value)
 		// add yaw and pitch input to controller
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
+	}
+}
+
+void AStealthCharacter::OpenInventory(const FInputActionValue& Value)
+{
+	APlayerController* PlayerController = Cast<APlayerController>(GetController());
+
+	if (PlayerController != nullptr)
+	{
+		AMainHUD* MainHUD = Cast<AMainHUD>(PlayerController->GetHUD());
+
+		if (MainHUD != nullptr)
+		{
+			MainHUD->PushWidget(PlayerInventoryWidgetClass, EWidgetStack::OverlayStack);
+		}
 	}
 }
