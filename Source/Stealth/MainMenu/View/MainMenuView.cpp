@@ -5,7 +5,7 @@
 
 #include "StealthStackWidget.h"
 #include "Kismet/GameplayStatics.h"
-#include "Stealth/MainMenu/MainMenuHUD.h"
+#include "../../General/MainHUD.h"
 
 void UMainMenuView::NativeOnActivated()
 {
@@ -25,7 +25,7 @@ void UMainMenuView::OnPlayButtonClicked()
 
 void UMainMenuView::OnExitButtonClicked()
 {
-	HUD = StaticCast<AMainMenuHUD*>(GetOwningPlayer()->GetHUD());
+	HUD = StaticCast<AMainHUD*>(GetOwningPlayer()->GetHUD());
 
 	if(HUD)
 	{

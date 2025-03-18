@@ -7,7 +7,7 @@
 #include "CommonWidgets/StealthCommonButton.h"
 #include "MainMenuView.generated.h"
 
-class AMainMenuHUD;
+class AMainHUD;
 class UStealthCommonButton;
 /**
  * 
@@ -41,7 +41,7 @@ public:
 	UStealthCommonButton* ExitButton;
 
 	UPROPERTY()
-	AMainMenuHUD* HUD;
+	AMainHUD* HUD;
 	
 	UPROPERTY(EditAnywhere, Category = UI)
 	TSubclassOf<UCommonActivatableWidget> PlayButtonPopup;
