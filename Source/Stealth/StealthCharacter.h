@@ -7,6 +7,8 @@
 #include "Logging/LogMacros.h"
 #include "StealthCharacter.generated.h"
 
+class UCommonActivatableWidget;
+class UPlayerViewModel;
 class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
@@ -44,6 +46,21 @@ class AStealthCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* InventoryAction;
+
+	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UPlayerViewModel* PlayerViewModel;
+
+	UPROPERTY()
+	int32 MaxHealth;
+	
+	UPROPERTY()
+	int32 Health;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UCommonActivatableWidget> PlayerInventoryWidgetClass;
+
 public:
 	AStealthCharacter();
 	
@@ -55,6 +72,8 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
+
+	void OpenInventory(const FInputActionValue& Value);
 			
 
 protected:
@@ -68,5 +87,8 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+	UPlayerViewModel* GetPlayerViewModel();
+
 };
 

@@ -10,6 +10,9 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "Game/ViewModel/PlayerViewModel.h"
+#include "General/MainHUD.h"
+#include "MainMenu/View/StealthStackWidget.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -52,6 +55,9 @@ AStealthCharacter::AStealthCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+
+	MaxHealth = 100;
+	Health = MaxHealth;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -144,4 +150,19 @@ void AStealthCharacter::OpenInventory(const FInputActionValue& Value)
 			MainHUD->PushWidget(PlayerInventoryWidgetClass, EWidgetStack::OverlayStack);
 		}
 	}
+}
+
+UPlayerViewModel* AStealthCharacter::GetPlayerViewModel()
+{
+	if(!PlayerViewModel)
+	{
+		PlayerViewModel = NewObject<UPlayerViewModel>();
+		if(PlayerViewModel)
+		{
+			PlayerViewModel->SetMaxHealth(MaxHealth);
+			PlayerViewModel->SetPlayerHealth(Health);
+		}
+	}
+	
+	return PlayerViewModel;
 }
