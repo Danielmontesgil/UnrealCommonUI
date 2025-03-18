@@ -2,7 +2,6 @@
 
 #include "StealthGameMode.h"
 #include "General/MainHUD.h"
-#include "MainMenu/View/StealthStackWidget.h"
 #include "UObject/ConstructorHelpers.h"
 #include "CommonActivatableWidget.h"
 
@@ -29,7 +28,7 @@ void AStealthGameMode::OnHudLoaded() const
 	{
 		if(AMainHUD* HUD = Cast<AMainHUD>(GetWorld()->GetFirstPlayerController()->GetHUD()))
 		{
-			HUD->PushWidget(GameModeInitialWidgetClass, EWidgetStack::MenuStack);
+			HUD->PushWidget(GameModeInitialWidgetClass, InitialWidgetStack);
 
 			if(IsMenu)
 			{

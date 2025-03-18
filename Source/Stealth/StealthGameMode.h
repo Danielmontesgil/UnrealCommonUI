@@ -6,6 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "StealthGameMode.generated.h"
 
+enum class EWidgetStack : uint8;
 class UPlayerViewModel;
 class UCommonActivatableWidget;
 
@@ -17,6 +18,9 @@ class AStealthGameMode : public AGameModeBase
 private:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UCommonActivatableWidget> GameModeInitialWidgetClass;
+
+	UPROPERTY(EditAnywhere)
+	EWidgetStack InitialWidgetStack;
 
 	UPROPERTY(EditAnywhere)
 	bool IsMenu;
