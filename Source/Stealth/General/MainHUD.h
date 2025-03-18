@@ -4,17 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/HUD.h"
-#include "MainMenuHUD.generated.h"
+#include "MainHUD.generated.h"
 
 enum class EWidgetStack : uint8;
-class UCommonActivatableWidgetStack;
 class UCommonActivatableWidget;
 class UStealthStackWidget;
 /**
  * 
  */
 UCLASS()
-class STEALTH_API AMainMenuHUD : public AHUD
+class STEALTH_API AMainHUD : public AHUD
 {
 	GENERATED_BODY()
 
@@ -24,9 +23,6 @@ private:
 
 	UPROPERTY()
 	UStealthStackWidget* StealthStackWidget;
-
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<UCommonActivatableWidget> MainMenuWidgetClass;
 
 protected:
 	virtual void BeginPlay() override;
