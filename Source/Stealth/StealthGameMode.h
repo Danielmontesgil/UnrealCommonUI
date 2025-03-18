@@ -6,13 +6,30 @@
 #include "GameFramework/GameModeBase.h"
 #include "StealthGameMode.generated.h"
 
+class UPlayerViewModel;
+class UCommonActivatableWidget;
+
 UCLASS(minimalapi)
 class AStealthGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
+private:
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UCommonActivatableWidget> GameModeInitialWidgetClass;
+
+	UPROPERTY(EditAnywhere)
+	bool IsMenu;
+
 public:
 	AStealthGameMode();
+
+protected:
+	virtual void BeginPlay() override;
+
+private:	
+	UFUNCTION()
+	void OnHudLoaded() const;
 };
 
 
