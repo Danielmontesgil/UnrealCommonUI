@@ -13,8 +13,10 @@ class UCommonActivatableWidgetStack;
 UENUM()
 enum class EWidgetStack : uint8
 {
-	MenuStack = 0,
-	PopUpStack = 1
+	HUDStack = 0,
+	OverlayStack = 1,
+	MenuStack = 2,
+	PopUpStack = 3
 };
 
 /**
@@ -26,6 +28,12 @@ class STEALTH_API UStealthStackWidget : public UCommonUserWidget
 	GENERATED_BODY()
 
 public:
+	UPROPERTY(EditAnywhere, meta=(BindWidget), BlueprintReadWrite)
+	UCommonActivatableWidgetStack* HUDStack;
+
+	UPROPERTY(EditAnywhere, meta=(BindWidget), BlueprintReadWrite)
+	UCommonActivatableWidgetStack* OverlayStack;
+	
 	UPROPERTY(EditAnywhere, meta=(BindWidget), BlueprintReadWrite)
 	UCommonActivatableWidgetStack* MenuStack;
 

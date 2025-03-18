@@ -10,11 +10,17 @@ void UStealthStackWidget::PushWidget(const TSubclassOf<UCommonActivatableWidget>
 {
 	switch (WidgetStack)
 	{
+	case EWidgetStack::OverlayStack:
+		OverlayStack->AddWidget<UCommonActivatableWidget>(WidgetToPush);
+		break;
 	case EWidgetStack::MenuStack:
 		MenuStack->AddWidget<UCommonActivatableWidget>(WidgetToPush);
 		break;
 	case EWidgetStack::PopUpStack:
 		PopUpStack->AddWidget<UCommonActivatableWidget>(WidgetToPush);
+		break;
+	default:
+		HUDStack->AddWidget<UCommonActivatableWidget>(WidgetToPush);
 		break;
 	}
 }
