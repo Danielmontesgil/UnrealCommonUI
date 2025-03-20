@@ -2,8 +2,7 @@
 
 
 #include "MainMenuView.h"
-
-#include "StealthStackWidget.h"
+#include "../../General/View/StealthStackWidget.h"
 #include "Kismet/GameplayStatics.h"
 #include "../../General/MainHUD.h"
 

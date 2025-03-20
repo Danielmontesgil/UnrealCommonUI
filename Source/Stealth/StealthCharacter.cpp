@@ -12,7 +12,7 @@
 #include "InputActionValue.h"
 #include "Game/ViewModel/PlayerViewModel.h"
 #include "General/MainHUD.h"
-#include "MainMenu/View/StealthStackWidget.h"
+#include "General/View/StealthStackWidget.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 

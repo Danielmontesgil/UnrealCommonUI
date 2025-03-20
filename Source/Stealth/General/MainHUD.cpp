@@ -3,7 +3,7 @@
 #include "MainHUD.h"
 #include "CommonActivatableWidget.h"
 #include "Blueprint/UserWidget.h"
-#include "../MainMenu/View/StealthStackWidget.h"
+#include "View/StealthStackWidget.h"
 
 void AMainHUD::BeginPlay()
 {
