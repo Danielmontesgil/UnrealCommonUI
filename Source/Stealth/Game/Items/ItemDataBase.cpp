@@ -5,6 +5,7 @@
 
 TArray<FItemData*> UItemDataBase::Items;
 bool UItemDataBase::IsLoaded = false;
+const FItemData UItemDataBase::FallbackItem = FItemData();
 
 void UItemDataBase::LoadItems()
 {
@@ -23,7 +24,7 @@ void UItemDataBase::LoadItems()
 	}
 }
 
-FItemData* UItemDataBase::GetItemByName(const FString& Name)
+const FItemData& UItemDataBase::GetItemByName(const FString& Name)
 {
 	CheckStatus();
 
@@ -32,29 +33,34 @@ FItemData* UItemDataBase::GetItemByName(const FString& Name)
 		return Item->Name == Name;
 	}))
 	{
-		return *FoundItem;
+		return **FoundItem;
 	}
 
-	return nullptr;
+	return FallbackItem;
 }
 
-FItemData* UItemDataBase::GetRandomItem()
+const FItemData& UItemDataBase::GetRandomItem()
 {
 	CheckStatus();
 
 	if(Items.Num() <= 0)
 	{
-		return nullptr;
+		return FallbackItem;
 	}
 	
 	if(Items.Num() == 1)
 	{
-		return Items[0];
+		return *Items[0];
 	}
 	
-	const int RandomIndex = rand() % Items.Num();
+	const int RandomIndex = FMath::RandRange(0, Items.Num() - 1);
 
-	return Items[RandomIndex];
+	return *Items[RandomIndex];
+}
+
+const FItemData UItemDataBase::GetFallbackItem()
+{
+	return FallbackItem;
 }
 
 void UItemDataBase::CheckStatus()

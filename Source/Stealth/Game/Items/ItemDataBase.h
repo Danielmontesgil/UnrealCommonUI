@@ -17,11 +17,13 @@ class STEALTH_API UItemDataBase : public UObject
 
 public:
 	static void LoadItems();
-	static FItemData* GetItemByName(const FString& Name);
-	static FItemData* GetRandomItem();
+	static const FItemData& GetItemByName(const FString& Name);
+	static const FItemData& GetRandomItem();
+	static const FItemData GetFallbackItem();
 
 private:
 	static TArray<FItemData*> Items;
 	static bool IsLoaded;
+	static const FItemData FallbackItem;
 	static void CheckStatus();
 };
