@@ -12,10 +12,13 @@ UInventoryItem::UInventoryItem()
 
 	MaxStack = 0;
 	SellPrice = 0;
+
+	ItemQuantity = 0;
 }
 
-UInventoryItem::UInventoryItem(FItemData ItemData)
+void UInventoryItem::Init(const FItemData& ItemData)
 {
+	Id = ItemData.Id;
 	Name = ItemData.Name;
 	Icon = ItemData.Icon;
 	UseText = ItemData.UseText;

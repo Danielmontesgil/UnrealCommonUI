@@ -19,7 +19,7 @@ class STEALTH_API UInventoryItem : public UItemBase
 public:
 
 	UInventoryItem();
-	UInventoryItem(FItemData ItemData);
+	void Init(const FItemData& ItemData);
 
 	virtual FString GetId() override { return Id; }
 	virtual FString GetName() override { return Name; }
@@ -32,10 +32,16 @@ public:
 	UFUNCTION()
 	virtual uint32 GetMaxStack() { return  MaxStack; }
 
+	UFUNCTION()
+	virtual uint32 GetItemQuantity () { return ItemQuantity; }
+
 protected:
 	UPROPERTY(EditAnywhere)
 	uint32 SellPrice;
 
 	UPROPERTY(EditAnywhere)
 	uint32 MaxStack;
+
+	UPROPERTY(EditAnywhere)
+	uint32 ItemQuantity;
 };
