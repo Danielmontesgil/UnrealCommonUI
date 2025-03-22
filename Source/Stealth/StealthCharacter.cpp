@@ -10,6 +10,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "Game/Inventory/InventoryModel.h"
 #include "Game/ViewModel/PlayerViewModel.h"
 #include "General/MainHUD.h"
 #include "General/View/StealthStackWidget.h"
@@ -94,6 +95,7 @@ void AStealthCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 
 		// Inventory
 		EnhancedInputComponent->BindAction(InventoryAction, ETriggerEvent::Triggered, this, &AStealthCharacter::OpenInventory);
+		EnhancedInputComponent->BindAction(InventoryAction, ETriggerEvent::Started, this, &AStealthCharacter::OpenInventory);
 	}
 	else
 	{

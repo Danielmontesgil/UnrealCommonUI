@@ -5,11 +5,17 @@
 
 #include "Stealth/Game/Items/InventoryItem.h"
 
-void UInventoryModel::AddItem(const UInventoryItem* ItemToAdd, const uint32 ItemAmount)
+UInventoryModel::UInventoryModel()
 {
+	Items.Reserve(20);
 }
 
-bool UInventoryModel::RemoveItem(const UInventoryItem* ItemToRemove, const uint32 ItemAmount)
+void UInventoryModel::AddItem(UInventoryItem* ItemToAdd)
+{
+	Items.Push(ItemToAdd);
+}
+
+bool UInventoryModel::RemoveItem(const UInventoryItem* ItemToRemove)
 {
 	return true;
 }

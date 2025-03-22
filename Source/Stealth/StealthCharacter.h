@@ -7,6 +7,7 @@
 #include "Logging/LogMacros.h"
 #include "StealthCharacter.generated.h"
 
+class UInventoryModel;
 class UCommonActivatableWidget;
 class UPlayerViewModel;
 class USpringArmComponent;
@@ -49,6 +50,9 @@ class AStealthCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* InventoryAction;
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UCommonActivatableWidget> PlayerInventoryWidgetClass;
+
 	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UPlayerViewModel* PlayerViewModel;
 
@@ -60,6 +64,7 @@ class AStealthCharacter : public ACharacter
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UCommonActivatableWidget> PlayerInventoryWidgetClass;
+	UInventoryModel* PlayerInventoryModel;
 
 public:
 	AStealthCharacter();

@@ -16,10 +16,12 @@ class STEALTH_API UInventoryModel : public UObject
 	GENERATED_BODY()
 
 public:
+	UInventoryModel();
+	
 	UFUNCTION()
-	void AddItem(const UInventoryItem* ItemToAdd, const uint32 ItemAmount);
+	void AddItem(UInventoryItem* ItemToAdd);
 	UFUNCTION()
-	bool RemoveItem(const UInventoryItem* ItemToRemove, const uint32 ItemAmount);
+	bool RemoveItem(const UInventoryItem* ItemToRemove);
 	UFUNCTION()
 	const UInventoryItem* GetItemByIndex(const uint32& ItemIndex) const;
 	UFUNCTION()
