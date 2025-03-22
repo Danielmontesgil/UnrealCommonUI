@@ -2,17 +2,24 @@
 
 
 #include "InventoryModel.h"
-
+#include "InventorySlotModel.h"
 #include "Stealth/Game/Items/InventoryItem.h"
+#include "InventorySlotModel.h"
 
 UInventoryModel::UInventoryModel()
 {
-	Items.Reserve(20);
+	Items.Init(NewObject<UInventorySlotModel>(),20);
 }
 
 void UInventoryModel::AddItem(UInventoryItem* ItemToAdd)
 {
-	Items.Push(ItemToAdd);
+	for(int i = 0; Items.Num() - 1; i++)
+	{
+		if(Items[i]->GetInventoryItem() == nullptr)
+		{
+			Items[i]->Init(ItemToAdd);
+		}
+	}
 }
 
 bool UInventoryModel::RemoveItem(const UInventoryItem* ItemToRemove)

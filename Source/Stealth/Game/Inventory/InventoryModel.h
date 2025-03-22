@@ -6,6 +6,7 @@
 #include "UObject/Object.h"
 #include "InventoryModel.generated.h"
 
+class UInventorySlotModel;
 class UInventoryItem;
 /**
  * 
@@ -29,9 +30,9 @@ public:
 	UFUNCTION()
 	bool HasItem(const UInventoryItem* Item);
 	UFUNCTION()
-	const TArray<UInventoryItem*>& GetAllItems() const { return Items; }
+	const TArray<UInventorySlotModel*>& GetAllItems() const { return Items; }
 
 private:
 	UPROPERTY(VisibleAnywhere, Category="ItemSlots", meta = (AllowPrivateAccess = "true"))
-	TArray<UInventoryItem*> Items;
+	TArray<UInventorySlotModel*> Items;
 };
