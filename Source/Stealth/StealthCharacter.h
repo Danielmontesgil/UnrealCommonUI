@@ -50,6 +50,9 @@ class AStealthCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* InventoryAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* ReceiveItemAction;
+
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UCommonActivatableWidget> PlayerInventoryWidgetClass;
 
@@ -63,7 +66,6 @@ class AStealthCharacter : public ACharacter
 	int32 Health;
 
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<UCommonActivatableWidget> PlayerInventoryWidgetClass;
 	UInventoryModel* PlayerInventoryModel;
 
 public:
@@ -79,6 +81,8 @@ protected:
 	void Look(const FInputActionValue& Value);
 
 	void OpenInventory(const FInputActionValue& Value);
+
+	void ReceiveItem(const FInputActionValue& Value);
 			
 
 protected:

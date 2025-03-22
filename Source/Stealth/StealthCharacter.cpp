@@ -10,7 +10,10 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+#include "Data/DataStructs.h"
 #include "Game/Inventory/InventoryModel.h"
+#include "Game/Items/InventoryItem.h"
+#include "Game/Items/ItemDataBase.h"
 #include "Game/ViewModel/PlayerViewModel.h"
 #include "General/MainHUD.h"
 #include "General/View/StealthStackWidget.h"
@@ -57,6 +60,8 @@ AStealthCharacter::AStealthCharacter()
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 
+	PlayerInventoryModel = NewObject<UInventoryModel>();
+
 	MaxHealth = 100;
 	Health = MaxHealth;
 }
@@ -94,8 +99,9 @@ void AStealthCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AStealthCharacter::Look);
 
 		// Inventory
-		EnhancedInputComponent->BindAction(InventoryAction, ETriggerEvent::Triggered, this, &AStealthCharacter::OpenInventory);
 		EnhancedInputComponent->BindAction(InventoryAction, ETriggerEvent::Started, this, &AStealthCharacter::OpenInventory);
+		
+		EnhancedInputComponent->BindAction(ReceiveItemAction, ETriggerEvent::Started, this, &AStealthCharacter::ReceiveItem);
 	}
 	else
 	{
@@ -151,6 +157,19 @@ void AStealthCharacter::OpenInventory(const FInputActionValue& Value)
 		{
 			MainHUD->PushWidget(PlayerInventoryWidgetClass, EWidgetStack::OverlayStack);
 		}
+	}
+}
+
+void AStealthCharacter::ReceiveItem(const FInputActionValue& Value)
+{
+	FItemData ItemData = UItemDataBase::GetRandomItem();
+	if (ItemData.Id != "-1")
+	{
+		UInventoryItem* ItemToAdd = NewObject<UInventoryItem>(this);
+		ItemToAdd->Init(ItemData);
+		UE_LOG(LogTemp, Display, TEXT("Item with Id: %s added"), *(ItemToAdd->GetId()))
+		
+		PlayerInventoryModel->AddItem(ItemToAdd);
 	}
 }
 
