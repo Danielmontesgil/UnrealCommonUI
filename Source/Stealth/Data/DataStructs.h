@@ -8,6 +8,11 @@ struct FItemData : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 
+	FItemData() : Id("-1"){};
+	
+	FItemData(const FString& Id, const FString& Name, UTexture2D* Icon, const int SellPrice, const int MaxStack) :
+	Id(Id), Name(Name), Icon(Icon), SellPrice(SellPrice), MaxStack(MaxStack){}
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString Id;
 
@@ -25,4 +30,14 @@ struct FItemData : public FTableRowBase
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString UseText = FString("Does something, maybe?");
+	
+	bool operator==(const FItemData& Other) const
+	{
+		return Id == Other.Id;
+	}
+
+	bool operator!=(const FItemData& Other) const
+	{
+		return !(*this == Other);
+	}
 };
