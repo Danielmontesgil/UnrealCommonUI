@@ -14,6 +14,7 @@ class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
+class UMVVMViewModelBase;
 struct FInputActionValue;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
@@ -97,7 +98,11 @@ public:
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
+	UFUNCTION()
 	UPlayerViewModel* GetPlayerViewModel();
+
+	UFUNCTION()
+	void NotifySlotViewModel(UMVVMViewModelBase* ViewModel, const int Index) const;
 
 };
 

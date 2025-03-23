@@ -5,6 +5,7 @@
 #include "InventorySlotModel.h"
 #include "Stealth/Game/Items/InventoryItem.h"
 #include "InventorySlotModel.h"
+#include "MVVMViewModelBase.h"
 
 UInventoryModel::UInventoryModel()
 {
@@ -40,4 +41,12 @@ const uint32 UInventoryModel::GetItemQuantity(const UInventoryItem* Item)
 bool UInventoryModel::HasItem(const UInventoryItem* Item)
 {
 	return true;
+}
+
+void UInventoryModel::SetSlotViewModel(UMVVMViewModelBase* ViewModel, const int SlotIndex)
+{
+	if(UInventorySlotModel* Slot = Items[SlotIndex])
+	{
+		Slot->SetSlotViewModel(ViewModel);
+	}
 }

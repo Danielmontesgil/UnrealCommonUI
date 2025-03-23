@@ -187,3 +187,8 @@ UPlayerViewModel* AStealthCharacter::GetPlayerViewModel()
 	
 	return PlayerViewModel;
 }
+
+void AStealthCharacter::NotifySlotViewModel(UMVVMViewModelBase* ViewModel, const int Index) const
+{
+	PlayerInventoryModel->SetSlotViewModel(ViewModel, Index);
+}

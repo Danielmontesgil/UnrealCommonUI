@@ -6,6 +6,8 @@
 #include "UObject/Object.h"
 #include "InventorySlotModel.generated.h"
 
+class UMVVMViewModelBase;
+class UInventorySlotViewModel;
 class UInventoryItem;
 /**
  * 
@@ -19,11 +21,18 @@ public:
 	UInventorySlotModel();
 
 	UFUNCTION()
-	void Init(UInventoryItem* ItemInSlot) { InventoryItem = ItemInSlot; };
+	void Init(UInventoryItem* ItemInSlot);
+
+	UFUNCTION()
+	void SetSlotViewModel(UMVVMViewModelBase* ViewModel);
 	
 	UFUNCTION(BlueprintCallable)
 	UInventoryItem* GetInventoryItem();
 
 private:
+	UPROPERTY()
 	UInventoryItem* InventoryItem;
+
+	UPROPERTY()
+	UInventorySlotViewModel* SlotViewModel;
 };

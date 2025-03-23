@@ -6,6 +6,7 @@
 #include "UObject/Object.h"
 #include "InventoryModel.generated.h"
 
+class UMVVMViewModelBase;
 class UInventorySlotModel;
 class UInventoryItem;
 /**
@@ -31,6 +32,9 @@ public:
 	bool HasItem(const UInventoryItem* Item);
 	UFUNCTION()
 	const TArray<UInventorySlotModel*>& GetAllItems() const { return Items; }
+
+	UFUNCTION()
+	void SetSlotViewModel(UMVVMViewModelBase* ViewModel, const int SlotIndex);
 
 private:
 	UPROPERTY(VisibleAnywhere, Category="ItemSlots", meta = (AllowPrivateAccess = "true"))
