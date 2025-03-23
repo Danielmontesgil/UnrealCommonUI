@@ -22,5 +22,12 @@ public:
 	UPROPERTY(BlueprintReadWrite, FieldNotify)
 	int ItemAmount;
 
+	UPROPERTY(BlueprintReadWrite, FieldNotify)
+	ESlateVisibility ShowAmountText;
+
+	UPROPERTY(BlueprintReadWrite, FieldNotify)
+	bool IsSlotFocusable;
+
+	UFUNCTION()
 	void SetInventoryItem(UTexture2D* NewIcon, const int& NewItemAmount);
 };
