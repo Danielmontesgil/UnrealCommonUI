@@ -23,7 +23,7 @@ public:
 	int ItemAmount;
 
 	UPROPERTY(BlueprintReadWrite, FieldNotify)
-	ESlateVisibility ShowAmountText;
+	ESlateVisibility AmountTextVisibility;
 
 	UPROPERTY(BlueprintReadWrite, FieldNotify)
 	bool IsSlotFocusable;
