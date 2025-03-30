@@ -27,21 +27,24 @@ public:
 	virtual FString GetUseText() override { return UseText; }
 	
 	UFUNCTION()
-	virtual uint32 GetSellPrice() { return SellPrice; }
+	virtual int32 GetSellPrice() { return SellPrice; }
 
 	UFUNCTION()
-	virtual uint32 GetMaxStack() { return  MaxStack; }
+	virtual int32 GetMaxStack() { return  MaxStack; }
 
 	UFUNCTION()
-	virtual uint32 GetItemQuantity () { return ItemQuantity; }
+	virtual int32 GetItemQuantity () { return ItemQuantity; }
+
+	UFUNCTION()
+	virtual void ModifyItemQuantity(const int32 Quantity) { ItemQuantity += Quantity; }; 
 
 protected:
 	UPROPERTY(EditAnywhere)
-	uint32 SellPrice;
+	int32 SellPrice;
 
 	UPROPERTY(EditAnywhere)
-	uint32 MaxStack;
+	int32 MaxStack;
 
 	UPROPERTY(EditAnywhere)
-	uint32 ItemQuantity;
+	int32 ItemQuantity;
 };
