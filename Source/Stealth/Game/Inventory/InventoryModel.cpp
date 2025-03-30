@@ -9,16 +9,48 @@
 
 UInventoryModel::UInventoryModel()
 {
-	Items.Init(NewObject<UInventorySlotModel>(),20);
+	Items.SetNum(20);
+
+	for (int32 i = 0; i < Items.Num(); i++)
+	{
+		Items[i] = NewObject<UInventorySlotModel>();
+	}
 }
 
 void UInventoryModel::AddItem(UInventoryItem* ItemToAdd)
 {
-	for(int i = 0; Items.Num() - 1; i++)
+	for(int i = 0; i < Items.Num(); i++)
 	{
-		if(Items[i]->GetInventoryItem() == nullptr)
+		if(UInventoryItem* ItemInSlot = Items[i]->GetInventoryItem(); ItemInSlot != nullptr)
 		{
-			Items[i]->Init(ItemToAdd);
+			if(ItemInSlot->GetId() == ItemToAdd->GetId())
+			{
+				const int32 RemainingSpace = ItemInSlot->GetMaxStack() - ItemInSlot->GetItemQuantity();
+				if(ItemToAdd->GetItemQuantity() <= RemainingSpace)
+				{
+					ItemInSlot->ModifyItemQuantity(ItemToAdd->GetItemQuantity());
+					return;
+				}
+			
+				ItemToAdd->ModifyItemQuantity(-RemainingSpace);
+				ItemInSlot->ModifyItemQuantity(RemainingSpace);
+			}
+		}
+	}
+	
+	for(int i = 0; i < Items.Num(); i++)
+	{
+		if(UInventorySlotModel* SlotModel = Items[i]; SlotModel->GetInventoryItem() == nullptr)
+		{
+			if(ItemToAdd->GetItemQuantity() <= ItemToAdd->GetMaxStack())
+			{
+				Items[i]->Init(ItemToAdd);
+				return;
+			}
+
+			SlotModel->Init(ItemToAdd);
+			SlotModel->GetInventoryItem()->ModifyItemQuantity(ItemToAdd->GetMaxStack());
+			ItemToAdd->ModifyItemQuantity(-ItemToAdd->GetMaxStack());
 		}
 	}
 }
@@ -45,8 +77,11 @@ bool UInventoryModel::HasItem(const UInventoryItem* Item)
 
 void UInventoryModel::SetSlotViewModel(UMVVMViewModelBase* ViewModel, const int SlotIndex)
 {
-	if(UInventorySlotModel* Slot = Items[SlotIndex])
+	if(ViewModel)
 	{
-		Slot->SetSlotViewModel(ViewModel);
+		if(UInventorySlotModel* Slot = Items[SlotIndex])
+		{
+			Slot->SetSlotViewModel(ViewModel);
+		}
 	}
 }
