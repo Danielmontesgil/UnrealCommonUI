@@ -22,9 +22,6 @@ private:
 	UPROPERTY(EditAnywhere)
 	EWidgetStack InitialWidgetStack;
 
-	UPROPERTY(EditAnywhere)
-	bool IsMenu;
-
 public:
 	AStealthGameMode();
 

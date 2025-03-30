@@ -6,6 +6,11 @@
 #include "Kismet/GameplayStatics.h"
 #include "../../General/MainHUD.h"
 
+TOptional<FUIInputConfig> UMainMenuView::GetDesiredInputConfig() const
+{
+	return FUIInputConfig(ECommonInputMode::Menu, EMouseCaptureMode::NoCapture);
+}
+
 void UMainMenuView::NativeOnActivated()
 {
 	Super::NativeOnActivated();
@@ -19,7 +24,7 @@ void UMainMenuView::NativeOnActivated()
 void UMainMenuView::OnPlayButtonClicked()
 {
 	GetOwningPlayer()->SetInputMode(FInputModeGameOnly());
-	UGameplayStatics::OpenLevel(this, "ThirdPersonMap");
+	GetWorld()->ServerTravel("ThirdPersonMap");
 }
 
 void UMainMenuView::OnExitButtonClicked()

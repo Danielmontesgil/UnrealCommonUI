@@ -29,15 +29,6 @@ void AStealthGameMode::OnHudLoaded() const
 		if(AMainHUD* HUD = Cast<AMainHUD>(GetWorld()->GetFirstPlayerController()->GetHUD()))
 		{
 			HUD->PushWidget(GameModeInitialWidgetClass, InitialWidgetStack);
-
-			if(IsMenu)
-			{
-				if(APlayerController* PlayerController = GetWorld()->GetFirstPlayerController())
-				{
-					PlayerController->SetInputMode(FInputModeUIOnly());
-					PlayerController->SetShowMouseCursor(true);
-				}
-			}
 		}
 	}
 }

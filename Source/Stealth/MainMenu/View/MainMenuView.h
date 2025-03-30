@@ -20,6 +20,8 @@ class STEALTH_API UMainMenuView : public UCommonActivatableWidget
 public:
 	virtual UWidget* NativeGetDesiredFocusTarget() const override { return PlayButton; };
 
+	virtual TOptional<FUIInputConfig> GetDesiredInputConfig() const override;
+
 protected:
 	virtual void NativeOnActivated() override;
 
