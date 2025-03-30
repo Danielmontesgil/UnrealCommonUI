@@ -167,6 +167,7 @@ void AStealthCharacter::ReceiveItem(const FInputActionValue& Value)
 	{
 		UInventoryItem* ItemToAdd = NewObject<UInventoryItem>(this);
 		ItemToAdd->Init(ItemData);
+		ItemToAdd->ModifyItemQuantity(5);
 		UE_LOG(LogTemp, Display, TEXT("Item with Id: %s added"), *(ItemToAdd->GetId()))
 		
 		PlayerInventoryModel->AddItem(ItemToAdd);
