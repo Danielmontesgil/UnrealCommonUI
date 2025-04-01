@@ -11,9 +11,9 @@ void UInventoryView::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	if (!InventorySlotWidgetClass.IsValid())
+	if (!InventorySlotWidgetClass)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("InventorySlotWidgetClass is not valid"));
+		UE_LOG(LogTemp, Error, TEXT("InventorySlotWidgetClass is null"));
 		return;
 	}
 
