@@ -100,7 +100,7 @@ void AStealthCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 
 		// Inventory
 		EnhancedInputComponent->BindAction(InventoryAction, ETriggerEvent::Started, this, &AStealthCharacter::OpenInventory);
-		
+		// Testing Inventory
 		EnhancedInputComponent->BindAction(ReceiveItemAction, ETriggerEvent::Started, this, &AStealthCharacter::ReceiveItem);
 
 		// Fiends list
@@ -172,8 +172,13 @@ void AStealthCharacter::ReceiveItem(const FInputActionValue& Value)
 		ItemToAdd->Init(ItemData);
 		ItemToAdd->ModifyItemQuantity(5);
 		UE_LOG(LogTemp, Display, TEXT("Item with Id: %s added"), *(ItemToAdd->GetId()))
-		
-		PlayerInventoryModel->AddItem(ItemToAdd);
+
+		if (PlayerInventoryModel != nullptr)
+		{
+			PlayerInventoryModel->AddItem(ItemToAdd);
+		}
+	}
+}
 
 void AStealthCharacter::OpenFriendsList(const FInputActionValue& Value)
 {
