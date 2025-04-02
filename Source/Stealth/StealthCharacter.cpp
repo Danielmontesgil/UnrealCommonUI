@@ -11,7 +11,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "Data/DataStructs.h"
-#include "Game/Inventory/InventoryModel.h"
+#include "Game/Models/InventoryModel.h"
 #include "Game/Items/InventoryItem.h"
 #include "Game/Items/ItemDataBase.h"
 #include "Game/ViewModel/PlayerViewModel.h"
