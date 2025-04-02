@@ -102,6 +102,9 @@ void AStealthCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 		EnhancedInputComponent->BindAction(InventoryAction, ETriggerEvent::Started, this, &AStealthCharacter::OpenInventory);
 		
 		EnhancedInputComponent->BindAction(ReceiveItemAction, ETriggerEvent::Started, this, &AStealthCharacter::ReceiveItem);
+
+		// Fiends list
+		EnhancedInputComponent->BindAction(FriendsListAction, ETriggerEvent::Started, this, &AStealthCharacter::OpenFriendsList);
 	}
 	else
 	{
@@ -171,6 +174,19 @@ void AStealthCharacter::ReceiveItem(const FInputActionValue& Value)
 		UE_LOG(LogTemp, Display, TEXT("Item with Id: %s added"), *(ItemToAdd->GetId()))
 		
 		PlayerInventoryModel->AddItem(ItemToAdd);
+
+void AStealthCharacter::OpenFriendsList(const FInputActionValue& Value)
+{
+	APlayerController* PlayerController = Cast<APlayerController>(GetController());
+
+	if (PlayerController != nullptr)
+	{
+		AMainHUD* MainHUD = Cast<AMainHUD>(PlayerController->GetHUD());
+
+		if (MainHUD != nullptr)
+		{
+			MainHUD->PushWidget(FriendsListWidgetClass, EWidgetStack::OverlayStack);
+		}
 	}
 }
 
