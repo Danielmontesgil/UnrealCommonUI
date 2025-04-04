@@ -41,5 +41,5 @@ public:
 	UCommonActivatableWidgetStack* PopUpStack;
 
 	UFUNCTION(BlueprintCallable)
-	void PushWidget(const TSubclassOf<UCommonActivatableWidget> &WidgetToPush, const EWidgetStack WidgetStack) const;
+	UCommonActivatableWidget* PushWidget(const TSubclassOf<UCommonActivatableWidget> &WidgetToPush, const EWidgetStack WidgetStack) const;
 };
