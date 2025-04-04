@@ -28,5 +28,5 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
-	virtual void PushWidget(const TSubclassOf<UCommonActivatableWidget> &WidgetToPush, const EWidgetStack WidgetStack);
+	virtual UCommonActivatableWidget* PushWidget(const TSubclassOf<UCommonActivatableWidget> &WidgetToPush, const EWidgetStack WidgetStack);
 };

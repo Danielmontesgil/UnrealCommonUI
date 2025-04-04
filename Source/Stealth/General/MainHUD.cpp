@@ -19,7 +19,7 @@ void AMainHUD::BeginPlay()
 	}
 }
 
-void AMainHUD::PushWidget(const TSubclassOf<UCommonActivatableWidget> &WidgetToPush, const EWidgetStack WidgetStack)
+UCommonActivatableWidget* AMainHUD::PushWidget(const TSubclassOf<UCommonActivatableWidget> &WidgetToPush, const EWidgetStack WidgetStack)
 {
-	StealthStackWidget->PushWidget(WidgetToPush, WidgetStack);
+	return StealthStackWidget->PushWidget(WidgetToPush, WidgetStack);
 }
