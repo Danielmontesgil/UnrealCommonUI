@@ -26,6 +26,9 @@ public:
 	ESlateVisibility AmountTextVisibility;
 
 	UPROPERTY(BlueprintReadWrite, FieldNotify)
+	ESlateVisibility SlotVisibility;
+
+	UPROPERTY(BlueprintReadWrite, FieldNotify)
 	bool IsSlotFocusable;
 
 	UFUNCTION()

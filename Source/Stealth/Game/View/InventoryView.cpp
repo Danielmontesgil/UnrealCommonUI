@@ -7,6 +7,21 @@
 #include "Stealth/StealthCharacter.h"
 #include "View/MVVMView.h"
 
+UWidget* UInventoryView::NativeGetDesiredFocusTarget() const
+{
+	if (InventorySlots.Num() > 0)
+	{
+		UUserWidget* FocusedSlot = InventorySlots[0];
+		
+		if (FocusedSlot && FocusedSlot->IsFocusable())
+		{
+			return FocusedSlot;
+		}
+	}
+
+	return nullptr;
+}
+
 void UInventoryView::NativeConstruct()
 {
 	Super::NativeConstruct();

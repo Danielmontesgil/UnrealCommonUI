@@ -26,6 +26,8 @@ public:
 	UPROPERTY(meta = (BindWidget))
 	UWrapBox* InventoryWrapBox;
 
+	virtual UWidget* NativeGetDesiredFocusTarget() const override;
+
 protected:
 	virtual void NativeConstruct() override;
 
