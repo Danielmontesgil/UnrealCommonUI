@@ -14,6 +14,9 @@
 #include "Game/Models/InventoryModel.h"
 #include "Game/Items/InventoryItem.h"
 #include "Game/Items/ItemDataBase.h"
+#include "Game/Models/FriendModel.h"
+#include "Game/Models/FriendsListModel.h"
+#include "Game/View/FriendsListView.h"
 #include "Game/ViewModel/PlayerViewModel.h"
 #include "General/MainHUD.h"
 #include "General/View/StealthStackWidget.h"
@@ -60,10 +63,21 @@ AStealthCharacter::AStealthCharacter()
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 
-	PlayerInventoryModel = NewObject<UInventoryModel>();
-
 	MaxHealth = 100;
 	Health = MaxHealth;
+}
+
+void AStealthCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	PlayerInventoryModel = NewObject<UInventoryModel>(this);
+	FriendsListModel = NewObject<UFriendsListModel>(this);
+
+	if (FriendsListModel)
+	{
+		UE_LOG(LogTemp, Display, TEXT("FriendsListModel created"));
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -105,6 +119,9 @@ void AStealthCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 
 		// Fiends list
 		EnhancedInputComponent->BindAction(FriendsListAction, ETriggerEvent::Started, this, &AStealthCharacter::OpenFriendsList);
+		EnhancedInputComponent->BindAction(AddFriendAction, ETriggerEvent::Started, this, &AStealthCharacter::AddFriend);
+		EnhancedInputComponent->BindAction(ToggleFriendStatusAction, ETriggerEvent::Started, this, &AStealthCharacter::ToggleFriendStatus);
+
 	}
 	else
 	{
@@ -190,8 +207,28 @@ void AStealthCharacter::OpenFriendsList(const FInputActionValue& Value)
 
 		if (MainHUD != nullptr)
 		{
-			MainHUD->PushWidget(FriendsListWidgetClass, EWidgetStack::OverlayStack);
+			FriendsListView = Cast<UFriendsListView>(MainHUD->PushWidget(FriendsListWidgetClass, EWidgetStack::OverlayStack));
 		}
+	}
+}
+
+void AStealthCharacter::AddFriend(const FInputActionValue& Value)
+{
+	UFriendModel* Friend = NewObject<UFriendModel>();
+	
+	if (FriendsListModel != nullptr)
+	{
+		int32 Num = FriendsListModel->GetFriendsAmount() + 1;
+		Friend->Init(FString::Format(TEXT("F00{0}"), {Num}),FString::Format(TEXT("John{0}"), {Num}));
+		FriendsListModel->AddFriend(Friend);
+	}
+}
+
+void AStealthCharacter::ToggleFriendStatus(const FInputActionValue& Value)
+{
+	if (FriendsListModel)
+	{
+		FriendsListModel->ToggleFriendStatus(0);
 	}
 }
 
@@ -213,4 +250,9 @@ UPlayerViewModel* AStealthCharacter::GetPlayerViewModel()
 void AStealthCharacter::NotifySlotViewModel(UMVVMViewModelBase* ViewModel, const int Index) const
 {
 	PlayerInventoryModel->SetSlotViewModel(ViewModel, Index);
+}
+
+void AStealthCharacter::NotifyFriendViewModel(UMVVMViewModelBase* ViewModel, const int Index) const
+{
+	FriendsListModel->SetFriendViewModel(ViewModel, Index);
 }

@@ -3,10 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Game/Models/FriendsListModel.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "StealthCharacter.generated.h"
 
+class UFriendsListView;
+class UFriendsListModel;
 class UInventoryModel;
 class UCommonActivatableWidget;
 class UPlayerViewModel;
@@ -57,6 +60,12 @@ class AStealthCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* FriendsListAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* AddFriendAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* ToggleFriendStatusAction;
+
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UCommonActivatableWidget> PlayerInventoryWidgetClass;
 
@@ -66,18 +75,25 @@ class AStealthCharacter : public ACharacter
 	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UPlayerViewModel* PlayerViewModel;
 
+	UPROPERTY(EditAnywhere)
+	UInventoryModel* PlayerInventoryModel;
+
+	UPROPERTY(EditAnywhere)
+	UFriendsListModel* FriendsListModel;
+
 	UPROPERTY()
 	int32 MaxHealth;
 	
 	UPROPERTY()
 	int32 Health;
 
-	UPROPERTY(EditAnywhere)
-	UInventoryModel* PlayerInventoryModel;
+	UPROPERTY()
+	UFriendsListView* FriendsListView;
 
 public:
 	AStealthCharacter();
-	
+
+	virtual void BeginPlay() override;
 
 protected:
 
@@ -92,6 +108,10 @@ protected:
 	void ReceiveItem(const FInputActionValue& Value);
 
 	void OpenFriendsList(const FInputActionValue& Value);
+
+	void AddFriend(const FInputActionValue& Value);
+
+	void ToggleFriendStatus(const FInputActionValue& Value);
 
 protected:
 
@@ -111,5 +131,10 @@ public:
 	UFUNCTION()
 	void NotifySlotViewModel(UMVVMViewModelBase* ViewModel, const int Index) const;
 
+	UFUNCTION()
+	void NotifyFriendViewModel(UMVVMViewModelBase* ViewModel, const int Index) const;
+
+	UFUNCTION()
+	int32 GetFriendsAmount() const { return FriendsListModel->GetFriendsAmount(); }
 };
 
