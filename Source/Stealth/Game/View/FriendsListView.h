@@ -6,6 +6,7 @@
 #include "CommonActivatableWidget.h"
 #include "FriendsListView.generated.h"
 
+class UVerticalBox;
 /**
  * 
  */
@@ -19,8 +20,11 @@ public:
 	TSoftClassPtr<UUserWidget> FriendWidgetClass;
 
 	UPROPERTY(BlueprintReadOnly)
-	TArray<UUserWidget*> Friends;
+	TArray<UUserWidget*> FriendWidgets;
+
+	UPROPERTY(meta = (BindWidget))
+	UVerticalBox* FriendsVerticalBox;
 
 protected:
-	virtual void NativeConstruct() override;
+	virtual void NativeOnActivated() override;
 };
