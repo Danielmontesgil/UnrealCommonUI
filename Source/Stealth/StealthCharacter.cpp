@@ -64,7 +64,7 @@ AStealthCharacter::AStealthCharacter()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 
 	MaxHealth = 100;
-	Health = MaxHealth;
+	Health = MaxHealth/2;
 }
 
 void AStealthCharacter::BeginPlay()
@@ -76,7 +76,7 @@ void AStealthCharacter::BeginPlay()
 
 	if (FriendsListModel)
 	{
-		UE_LOG(LogTemp, Display, TEXT("FriendsListModel created"));
+		FriendsListModel->Init();
 	}
 }
 
@@ -217,7 +217,6 @@ void AStealthCharacter::AddFriend(const FInputActionValue& Value)
 	UFriendModel* Friend = NewObject<UFriendModel>();
 	
 	if (FriendsListModel != nullptr)
-	{
 		int32 Num = FriendsListModel->GetFriendsAmount() + 1;
 		Friend->Init(FString::Format(TEXT("F00{0}"), {Num}),FString::Format(TEXT("John{0}"), {Num}));
 		FriendsListModel->AddFriend(Friend);

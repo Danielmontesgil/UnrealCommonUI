@@ -18,6 +18,9 @@ class STEALTH_API UFriendsListModel : public UObject
 
 public:
 	UFriendsListModel();
+
+	UFUNCTION()
+	void Init();
 	
 	UFUNCTION()
 	void AddFriend(UFriendModel* FriendToAdd);
@@ -37,4 +40,7 @@ private:
 
 	UFUNCTION()
 	void SaveFriends() const;
+
+	UFUNCTION()
+	void LoadFriends();
 };

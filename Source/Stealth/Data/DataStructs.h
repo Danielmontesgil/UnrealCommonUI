@@ -3,6 +3,8 @@
 #include "Engine/DataTable.h"
 #include "DataStructs.generated.h"
 
+enum class EFriendStatus : uint8;
+
 USTRUCT(BlueprintType)
 struct FItemData : public FTableRowBase
 {
@@ -40,4 +42,19 @@ struct FItemData : public FTableRowBase
 	{
 		return !(*this == Other);
 	}
+};
+
+USTRUCT()
+struct FFriendData
+{
+	GENERATED_BODY()
+
+	UPROPERTY()
+	FString Id;
+
+	UPROPERTY()
+	FString Name;
+
+	UPROPERTY()
+	EFriendStatus Status; 
 };

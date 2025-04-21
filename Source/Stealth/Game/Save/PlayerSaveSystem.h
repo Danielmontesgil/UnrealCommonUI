@@ -6,6 +6,7 @@
 #include "GameFramework/SaveGame.h"
 #include "PlayerSaveSystem.generated.h"
 
+struct FFriendData;
 class UFriendModel;
 class UInventoryItem;
 /**
@@ -18,7 +19,7 @@ class STEALTH_API UPlayerSaveSystem : public USaveGame
 
 public:
 	UPROPERTY()
-	TArray<UFriendModel*> Friends;
+	TArray<FFriendData> Friends;
 
 	UPROPERTY()
 	TArray<UInventoryItem*> Inventory;
