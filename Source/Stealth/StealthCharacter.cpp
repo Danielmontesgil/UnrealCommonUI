@@ -217,9 +217,15 @@ void AStealthCharacter::AddFriend(const FInputActionValue& Value)
 	UFriendModel* Friend = NewObject<UFriendModel>();
 	
 	if (FriendsListModel != nullptr)
+	{		
 		int32 Num = FriendsListModel->GetFriendsAmount() + 1;
 		Friend->Init(FString::Format(TEXT("F00{0}"), {Num}),FString::Format(TEXT("John{0}"), {Num}));
 		FriendsListModel->AddFriend(Friend);
+
+		if (FriendsListView)
+		{
+			FriendsListView->AddFriendView();
+		}
 	}
 }
 

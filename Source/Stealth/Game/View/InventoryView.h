@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "CommonActivatableWidget.h"
+#include "StealthActivatableWidget.h"
 #include "InventoryView.generated.h"
 
 class UWrapBox;
@@ -12,7 +12,7 @@ class UMVVMViewModelBase;
  * 
  */
 UCLASS()
-class STEALTH_API UInventoryView : public UCommonActivatableWidget
+class STEALTH_API UInventoryView : public UStealthActivatableWidget
 {
 	GENERATED_BODY()
 
@@ -27,7 +27,7 @@ public:
 	UWrapBox* InventoryWrapBox;
 
 	virtual UWidget* NativeGetDesiredFocusTarget() const override;
-
+	
 protected:
 	virtual void NativeConstruct() override;
 

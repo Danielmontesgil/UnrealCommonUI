@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "CommonActivatableWidget.h"
+#include "StealthActivatableWidget.h"
 #include "FriendsListView.generated.h"
 
 class UVerticalBox;
@@ -11,7 +11,7 @@ class UVerticalBox;
  * 
  */
 UCLASS()
-class STEALTH_API UFriendsListView : public UCommonActivatableWidget
+class STEALTH_API UFriendsListView : public UStealthActivatableWidget
 {
 	GENERATED_BODY()
 
