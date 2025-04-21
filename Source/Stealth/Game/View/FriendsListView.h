@@ -25,6 +25,13 @@ public:
 	UPROPERTY(meta = (BindWidget))
 	UVerticalBox* FriendsVerticalBox;
 
+	UFUNCTION()
+	void AddFriendView();
+
 protected:
 	virtual void NativeOnActivated() override;
+
+private:
+	UFUNCTION()
+	void NotifyFriendViewModel(const int32 Index);
 };
