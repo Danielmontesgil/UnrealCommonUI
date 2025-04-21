@@ -104,16 +104,8 @@ protected:
 	void Look(const FInputActionValue& Value);
 
 	void OpenInventory(const FInputActionValue& Value);
-
-	void ReceiveItem(const FInputActionValue& Value);
-
+	
 	void OpenFriendsList(const FInputActionValue& Value);
-
-	void AddFriend(const FInputActionValue& Value);
-
-	void ToggleFriendStatus(const FInputActionValue& Value);
-
-protected:
 
 	virtual void NotifyControllerChanged() override;
 
@@ -136,5 +128,12 @@ public:
 
 	UFUNCTION()
 	int32 GetFriendsAmount() const { return FriendsListModel->GetFriendsAmount(); }
+
+	void AddFriend(const FInputActionValue& Value);
+
+	void ToggleFriendStatus(const FInputActionValue& Value);
+
+	void ReceiveItem(const FInputActionValue& Value);
+
 };
 
