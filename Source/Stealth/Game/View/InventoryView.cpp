@@ -26,13 +26,16 @@ void UInventoryView::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	if (!InventorySlotWidgetClass)
+	UClass* WidgetClass;
+	if (!InventorySlotWidgetClass.IsValid())
 	{
-		UE_LOG(LogTemp, Error, TEXT("InventorySlotWidgetClass is null"));
-		return;
+		WidgetClass = InventorySlotWidgetClass.LoadSynchronous();
+	}
+	else
+	{
+		WidgetClass = InventorySlotWidgetClass.Get();
 	}
 
-	UClass* WidgetClass = InventorySlotWidgetClass.LoadSynchronous();
 	if (!WidgetClass)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Widget class failed loading"));

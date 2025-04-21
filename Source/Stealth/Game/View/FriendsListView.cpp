@@ -12,8 +12,11 @@ void UFriendsListView::AddFriendView()
 	UClass* WidgetClass;
 	if (!FriendWidgetClass.IsValid())
 	{
+		WidgetClass = FriendWidgetClass.LoadSynchronous();
 	}
+	else
 	{
+		WidgetClass = FriendWidgetClass.Get();
 	}
 
 	if (!WidgetClass)
