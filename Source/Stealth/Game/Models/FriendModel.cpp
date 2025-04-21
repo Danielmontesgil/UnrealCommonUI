@@ -24,8 +24,16 @@ void UFriendModel::SetFriendViewModel(UMVVMViewModelBase* ViewModel)
 		if (InputFriendViewModel)
 		{
 			FriendViewModel = InputFriendViewModel;
-			FriendViewModel->InitFriend(Name, Status);
+			UpdateView();
 		}
+	}
+}
+
+void UFriendModel::UpdateView()
+{
+	if (FriendViewModel)
+	{
+		FriendViewModel->InitFriend(Name, Status);
 	}
 }
 

@@ -22,14 +22,22 @@ void UInventorySlotModel::SetSlotViewModel(UMVVMViewModelBase* ViewModel)
 		if(UInventorySlotViewModel* InventorySlotViewModel = Cast<UInventorySlotViewModel>(ViewModel))
 		{
 			SlotViewModel = InventorySlotViewModel;
-			if(InventoryItem)
-			{
-				SlotViewModel->SetInventoryItem(InventoryItem->GetIcon(), InventoryItem->GetItemQuantity());
-				return;
-			}
-
-			SlotViewModel->SetInventoryItem(nullptr, 0);
+			UpdateView();
 		}
+	}
+}
+
+void UInventorySlotModel::UpdateView()
+{
+	if (SlotViewModel)
+	{
+		if(InventoryItem)
+		{
+			SlotViewModel->SetInventoryItem(InventoryItem->GetIcon(), InventoryItem->GetItemQuantity());
+			return;
+		}
+
+		SlotViewModel->SetInventoryItem(nullptr, 0);
 	}
 }
 

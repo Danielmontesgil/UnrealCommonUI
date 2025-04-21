@@ -29,11 +29,14 @@ void UInventoryModel::AddItem(UInventoryItem* ItemToAdd)
 				if(ItemToAdd->GetItemQuantity() <= RemainingSpace)
 				{
 					ItemInSlot->ModifyItemQuantity(ItemToAdd->GetItemQuantity());
+					Items[i]->UpdateView();
 					return;
 				}
 			
 				ItemToAdd->ModifyItemQuantity(-RemainingSpace);
 				ItemInSlot->ModifyItemQuantity(RemainingSpace);
+
+				Items[i]->UpdateView();
 			}
 		}
 	}
@@ -45,12 +48,15 @@ void UInventoryModel::AddItem(UInventoryItem* ItemToAdd)
 			if(ItemToAdd->GetItemQuantity() <= ItemToAdd->GetMaxStack())
 			{
 				Items[i]->Init(ItemToAdd);
+				Items[i]->UpdateView();
 				return;
 			}
 
 			SlotModel->Init(ItemToAdd);
 			SlotModel->GetInventoryItem()->ModifyItemQuantity(ItemToAdd->GetMaxStack());
 			ItemToAdd->ModifyItemQuantity(-ItemToAdd->GetMaxStack());
+
+			SlotModel->UpdateView();
 		}
 	}
 }

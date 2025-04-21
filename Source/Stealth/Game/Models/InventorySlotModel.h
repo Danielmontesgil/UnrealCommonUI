@@ -25,6 +25,9 @@ public:
 
 	UFUNCTION()
 	void SetSlotViewModel(UMVVMViewModelBase* ViewModel);
+
+	UFUNCTION()
+	void UpdateView();
 	
 	UFUNCTION(BlueprintCallable)
 	UInventoryItem* GetInventoryItem();

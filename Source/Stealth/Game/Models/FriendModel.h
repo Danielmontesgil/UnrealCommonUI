@@ -46,6 +46,9 @@ public:
 	UFUNCTION()
 	void ToggleStatus();
 
+	UFUNCTION()
+	void UpdateView();
+
 private:
 	UPROPERTY()
 	FString Id;
